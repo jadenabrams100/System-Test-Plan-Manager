@@ -7,7 +7,7 @@ package edu.ncsu.csc216.stp.model.util;
  * @author Jaden Abrams
  * @author Henry Kon
  */
-public class SortedList<E> implements ISortedList<E> {
+public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	
 	/** the first node in the list */
 	private ListNode front;
