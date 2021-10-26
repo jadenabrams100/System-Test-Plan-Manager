@@ -40,6 +40,54 @@ public class TestCase {
 	}
 
 	/**
+	 * Gets the Test Case ID
+	 * @return the Test Case ID
+	 */
+	public String getTestCaseId() {
+		return testCaseId;
+	}
+
+	/**
+	 * Gets the Test Case Type
+	 * @return the Test Case type
+	 */
+	public String getTestType() {
+		return testType;
+	}
+
+	/**
+	 * Gets the Test Case Description
+	 * @return the Test Case description
+	 */
+	public String getTestDescription() {
+		return testDescription;
+	}
+
+	/**
+	 * Gets the expected Test Case results
+	 * @return the Expected Results
+	 */
+	public String getExpectedResults() {
+		return expectedResults;
+	}
+
+	/**
+	 * Gets all Results for the Test Case
+	 * @return a Log of all Test Case results.
+	 */
+	public ILog<TestResult> getResults() {
+		return results;
+	}
+
+	/**
+	 * Gets the current Test Plan that the Case belongs to
+	 * @return the Current Test Plan that the Case belongs to
+	 */
+	public TestPlan getPlan() {
+		return plan;
+	}
+
+	/**
 	 * Returns whether or not the Test Case is passing
 	 * If there are no Test Results in the log, the test is considered failing.
 	 * @return true if the Test Case is passing, false otherwise.
