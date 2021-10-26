@@ -1,11 +1,10 @@
-/**
- * 
- */
 package edu.ncsu.csc216.stp.model.util;
 
 /**
+ * Swap List Object
  * @author Jaden Abrams
  * @author Henry Kon
+ * @param <E> Generic Object Type
  */
 public class SwapList<E> implements ISwapList<E> {
 	/** the initial capacity for the swaplist */
@@ -29,7 +28,6 @@ public class SwapList<E> implements ISwapList<E> {
 	@Override
 	public void add(E element) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -50,7 +48,6 @@ public class SwapList<E> implements ISwapList<E> {
 	@Override
 	public void moveUp(int idx) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -60,7 +57,6 @@ public class SwapList<E> implements ISwapList<E> {
 	@Override
 	public void moveDown(int idx) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -70,7 +66,6 @@ public class SwapList<E> implements ISwapList<E> {
 	@Override
 	public void moveToFront(int idx) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -80,7 +75,6 @@ public class SwapList<E> implements ISwapList<E> {
 	@Override
 	public void moveToBack(int idx) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -104,19 +98,19 @@ public class SwapList<E> implements ISwapList<E> {
 	}
 	
 	/**
-	 * TODO: figure out what this does
-	 * @param i
+	 * Helper Method, documentation unavailable
+	 * @param i Documentation Pending
 	 */
 	private void checkCapacity(int i) {
-		
+		// TODO: Auto-generated method stub
 	}
 	
 	/**
-	 * TODO: figure out what this does
-	 * @param i
+	 * Helper Method, documentation unavailable
+	 * @param i the index to check
 	 */
 	private void checkIndex(int i) {
-		
+		// TODO: Auto-generated method stub
 	}
 
 }

@@ -4,8 +4,7 @@ package edu.ncsu.csc216.stp.model.util;
  * A node for the linked list SwapList
  * @author Jaden Abrams
  * @author Henry Kon
- * 
- *
+ * @param <E> Generic Object Type
  */
 public class ListNode<E> {
 	/** the date in the node */

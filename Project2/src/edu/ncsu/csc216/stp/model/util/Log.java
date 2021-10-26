@@ -1,12 +1,10 @@
-/**
- * 
- */
 package edu.ncsu.csc216.stp.model.util;
 
 /**
+ * Provides the functionality of a log where entries are added to the end and cannot be removed.
  * @author Jaden Abrams
  * @author Henry Kon
- * Provides the functionality of a log where entries are added to the end and cannot be removed.
+ * @param <E> Generic Object Type
  */
 public class Log<E> implements ILog<E> {
 	

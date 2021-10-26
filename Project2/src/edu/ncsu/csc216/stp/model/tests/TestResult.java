@@ -1,5 +1,11 @@
 package edu.ncsu.csc216.stp.model.tests;
 
+/**
+ * Test Result class
+ * Contains information about the results of a single execution of a Test Case.
+ * @author Henry Kon
+ * @author Jaden Abrams
+ */
 public class TestResult {
 	/** a string representing a passing test status */
 	private static final String PASS = "PASS";
@@ -16,7 +22,7 @@ public class TestResult {
 	 * @param actualResults the results of the test
 	 */
 	public TestResult(boolean passing, String actualResults) {
-		
+		// TODO: Auto-generated method stub
 	}
 	
 	/**
@@ -25,14 +31,14 @@ public class TestResult {
 	 */
 	public String getActualResults() {
 		return null;
-		
 	}
+
 	/**
 	 * sets the results of the test
 	 * @param actualResults the result to set
 	 */
 	private void setActualResults(String actualResults) {
-		
+		// TODO: Auto-generated method stub
 	}
 	
 	/**
@@ -48,7 +54,7 @@ public class TestResult {
 	 * @param isPassing if the test is passing
 	 */
 	private void setPassing(boolean isPassing) {
-		
+		// TODO: Auto-generated method stub
 	}
 	
 	/**

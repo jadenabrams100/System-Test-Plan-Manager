@@ -1,11 +1,10 @@
-/**
- * 
- */
 package edu.ncsu.csc216.stp.model.util;
 
 /**
+ * Sorted List Class
  * @author Jaden Abrams
  * @author Henry Kon
+ * @param <E> Generic Object Type
  */
 public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	
@@ -34,7 +33,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 
 	/**
 	 * removes the item from the list and returns it
-	 * @param the index to remove the item from
+	 * @param idx the index to remove the item from
 	 * @return the object removed
 	 */
 	@Override
@@ -45,7 +44,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	
 	/**
 	 * checks if the object is in the list
-	 * @param the object to check for
+	 * @param element the object to check for
 	 * @return if it is in the list
 	 */
 	@Override
@@ -55,7 +54,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	}
 	/**
 	 * returns the item at the index
-	 * @param the index to get
+	 * @param idx the index to get
 	 * @return the object at index
 	 */
 	@Override
@@ -73,12 +72,13 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 	/**
-	 * TODO: figure out what this does
-	 * @param idx
+	 * Helper method, documentation unavailable
+	 * @param idx the index to check.
 	 */
 	private void checkIndex(int idx) {
-		
+		// TODO: Auto-generated method stub
 	}
 
 }
