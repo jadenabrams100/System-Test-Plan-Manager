@@ -44,6 +44,22 @@ public abstract class AbstractTestPlan {
 	}
 
 	/**
+	 * Gets the test plan name
+	 * @return the name of the test plan
+	 */
+	public String getTestPlanName() {
+		return testPlanName;
+	}
+
+	/**
+	 * Gets all the cases in the test plan
+	 * @return a SwapList containing all the Test Cases in the Test Plan
+	 */
+	public ISwapList<TestCase> getCases() {
+		return cases;
+	}
+
+	/**
 	 * Removes the Test Case at the specified index and returns it.
 	 * Any exceptions from the  list should be thrown out of the method.
 	 * @param idx the index of the Test Case to remove

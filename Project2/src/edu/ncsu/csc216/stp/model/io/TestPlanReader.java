@@ -19,7 +19,7 @@ public class TestPlanReader {
 	 * @return a List of Test Plans
 	 * @throws IllegalArgumentException if the file cannot be loaded or does not exist.
 	 */
-	public static ISortedList<TestPlan> readTestPlanFile(File file) {
+	public static ISortedList<TestPlan> readTestPlansFile(File file) {
 		return null;
 	}
 
