@@ -55,8 +55,17 @@ public abstract class AbstractTestPlan {
 	 * Gets all the cases in the test plan
 	 * @return a SwapList containing all the Test Cases in the Test Plan
 	 */
-	public ISwapList<TestCase> getCases() {
+	public ISwapList<TestCase> getTestCases() {
 		return cases;
+	}
+
+	/**
+	 * Gets the Test Case at the specified index
+	 * @param idx the index of the Test Case
+	 * @return the Test Case
+	 */
+	public TestCase getTestCase(int idx) {
+		return null;
 	}
 
 	/**

@@ -83,7 +83,7 @@ public class TestCase {
 	 * Gets the current Test Plan that the Case belongs to
 	 * @return the Current Test Plan that the Case belongs to
 	 */
-	public TestPlan getPlan() {
+	public TestPlan getTestPlan() {
 		return plan;
 	}
 

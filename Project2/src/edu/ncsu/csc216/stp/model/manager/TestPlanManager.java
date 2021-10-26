@@ -21,7 +21,7 @@ public class TestPlanManager {
 	/** Stores the current Test Plan */
 	AbstractTestPlan currentTestPlan;
 	/** Tracks if the TestPlanManager has been changes since the last save */
-	boolean changed;
+	boolean isChanged;
 
 	/**
 	 * Constructs a new Test Plan Manager
@@ -44,6 +44,14 @@ public class TestPlanManager {
 	 */
 	public void saveTestPlans(File testPlanFile) {
 		// TODO: Auto-generated method stub
+	}
+
+	/**
+	 * Gets whether or not the Manager has been modified since the last save
+	 * @return true if the Manager has been modified, false otherwise.
+	 */
+	public boolean isChanged() {
+		return isChanged;
 	}
 
 	/**
