@@ -33,9 +33,11 @@ public class TestCase {
 
 	/**
 	 * Creates a Test Result from the given values and adds it to the end of the Test Results log.
+	 * @param passing true if the test is passing, false otherwise.
+	 * @param result the results of the test run.
 	 * @throws IllegalArgumentException if the TestResult cannot be constructed.
 	 */
-	public void addTestResult() {
+	public void addTestResult(boolean passing, String result) {
 		// TODO: Auto-generated method stub
 	}
 

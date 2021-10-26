@@ -50,7 +50,7 @@ public class FailingTestList extends AbstractTestPlan {
 	/**
 	 * Clears the FailingTestList of all Test Cases.
 	 */
-	public void clearTestCases() {
+	public void clearTests() {
 		// TODO: Auto-generated method stub
 	}
 }
