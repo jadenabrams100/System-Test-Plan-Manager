@@ -8,9 +8,9 @@ package edu.ncsu.csc216.stp.model.tests;
  */
 public class TestResult {
 	/** a string representing a passing test status */
-	private static final String PASS = "PASS";
+	public static final String PASS = "PASS";
 	/** a string representing a failing test status */
-	private static final String FAIL = "FAIL";
+	public static final String FAIL = "FAIL";
 	/** whether the test is passing or not */
 	private boolean passing;
 	/** the results of the test */
