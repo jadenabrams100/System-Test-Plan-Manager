@@ -31,7 +31,7 @@ class SortedListTest {
 	void testAdd() {
 		SortedList<String> s = new SortedList<String>();
 		Exception e1 = assertThrows(NullPointerException.class, () -> s.add(null));
-		assertEquals("Cannot add null element.", e1.getMessage());
+		assertEquals("Cannot add null element", e1.getMessage());
 		s.add("apple");
 		assertEquals(1, s.size());
 		Exception e2 = assertThrows(IllegalArgumentException.class, () -> s.add("apple"));
