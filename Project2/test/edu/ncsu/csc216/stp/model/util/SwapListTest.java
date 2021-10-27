@@ -20,7 +20,9 @@ class SwapListTest {
 	 */
 	@Test
 	void testSwapList() {
-		fail("Not yet implemented");
+		SwapList<String> s = new SwapList<String>();
+		assertEquals(0, s.size());
+		
 	}
 
 	/**
@@ -28,7 +30,14 @@ class SwapListTest {
 	 */
 	@Test
 	void testAdd() {
-		fail("Not yet implemented");
+		SwapList<String> s = new SwapList<String>();
+		Exception e1 = assertThrows(NullPointerException.class, () -> s.add(null));
+		assertEquals("Cannot add null element.", e1.getMessage());
+		s.add("apple");
+		s.add("banana");
+		s.add("dog");
+		s.add("salamander");
+		s.add("wolf");
 	}
 
 	/**
@@ -36,7 +45,26 @@ class SwapListTest {
 	 */
 	@Test
 	void testRemove() {
-		fail("Not yet implemented");
+		SwapList<String> s = new SwapList<String>();
+		s.add("apple");
+		s.add("banana");
+		s.add("dog");
+		s.add("salamander");
+		s.add("wolf");
+		Exception e1 = assertThrows(IndexOutOfBoundsException.class, () -> s.remove(-1));
+		assertEquals("Invalid index.", e1.getMessage());
+		Exception e2 = assertThrows(IndexOutOfBoundsException.class, () -> s.remove(5));
+		assertEquals("Invalid index.", e2.getMessage());
+		String front = s.remove(0);
+		assertEquals("apple", front);
+		assertEquals(4, s.size());
+		assertEquals("banana", s.get(0));
+		String back = s.remove(3);
+		assertEquals("wolf", back);
+		assertEquals("salamander", s.get(2));
+		String middle = s.remove(1);
+		assertEquals("dog", middle);
+		assertEquals("salamander", s.get(1));
 	}
 
 	/**
@@ -44,7 +72,21 @@ class SwapListTest {
 	 */
 	@Test
 	void testMoveUp() {
-		fail("Not yet implemented");
+		SwapList<String> s = new SwapList<String>();
+		s.add("apple");
+		s.add("banana");
+		s.add("dog");
+		s.add("salamander");
+		s.add("wolf");
+		Exception e1 = assertThrows(IndexOutOfBoundsException.class, () -> s.moveUp(-1));
+		assertEquals("Invalid index.", e1.getMessage());
+		Exception e2 = assertThrows(IndexOutOfBoundsException.class, () -> s.moveUp(5));
+		assertEquals("Invalid index.", e2.getMessage());
+		s.moveUp(0);
+		assertEquals("apple", s.get(0));
+		s.moveUp(1);
+		assertEquals("banana", s.get(0));
+		assertEquals("apple", s.get(1));
 	}
 
 	/**
@@ -52,7 +94,21 @@ class SwapListTest {
 	 */
 	@Test
 	void testMoveDown() {
-		fail("Not yet implemented");
+		SwapList<String> s = new SwapList<String>();
+		s.add("apple");
+		s.add("banana");
+		s.add("dog");
+		s.add("salamander");
+		s.add("wolf");
+		Exception e1 = assertThrows(IndexOutOfBoundsException.class, () -> s.moveDown(-1));
+		assertEquals("Invalid index.", e1.getMessage());
+		Exception e2 = assertThrows(IndexOutOfBoundsException.class, () -> s.moveDown(5));
+		assertEquals("Invalid index.", e2.getMessage());
+		s.moveDown(4);
+		assertEquals("wolf", s.get(4));
+		s.moveDown(0);
+		assertEquals("banana", s.get(0));
+		assertEquals("apple", s.get(1));
 	}
 
 	/**
@@ -60,7 +116,24 @@ class SwapListTest {
 	 */
 	@Test
 	void testMoveToFront() {
-		fail("Not yet implemented");
+		SwapList<String> s = new SwapList<String>();
+		s.add("apple");
+		s.add("banana");
+		s.add("dog");
+		s.add("salamander");
+		s.add("wolf");
+		Exception e1 = assertThrows(IndexOutOfBoundsException.class, () -> s.moveToFront(-1));
+		assertEquals("Invalid index.", e1.getMessage());
+		Exception e2 = assertThrows(IndexOutOfBoundsException.class, () -> s.moveToFront(5));
+		assertEquals("Invalid index.", e2.getMessage());
+		s.moveToFront(0);
+		assertEquals("apple", s.get(0));
+		s.moveToFront(2);
+		assertEquals("dog", s.get(0));
+		assertEquals("apple", s.get(1));
+		assertEquals("banana", s.get(2));
+		assertEquals("salamander", s.get(3));
+		assertEquals("wolf", s.get(4));
 	}
 
 	/**
@@ -68,7 +141,24 @@ class SwapListTest {
 	 */
 	@Test
 	void testMoveToBack() {
-		fail("Not yet implemented");
+		SwapList<String> s = new SwapList<String>();
+		s.add("apple");
+		s.add("banana");
+		s.add("dog");
+		s.add("salamander");
+		s.add("wolf");
+		Exception e1 = assertThrows(IndexOutOfBoundsException.class, () -> s.moveToBack(-1));
+		assertEquals("Invalid index.", e1.getMessage());
+		Exception e2 = assertThrows(IndexOutOfBoundsException.class, () -> s.moveToBack(5));
+		assertEquals("Invalid index.", e2.getMessage());
+		s.moveToBack(4);
+		assertEquals("wolf", s.get(4));
+		s.moveToBack(2);
+		assertEquals("apple", s.get(0));
+		assertEquals("banana", s.get(1));
+		assertEquals("salamander", s.get(2));
+		assertEquals("wolf", s.get(3));
+		assertEquals("dog", s.get(4));
 	}
 
 	/**
@@ -76,7 +166,17 @@ class SwapListTest {
 	 */
 	@Test
 	void testGet() {
-		fail("Not yet implemented");
+		SwapList<String> s = new SwapList<String>();
+		s.add("apple");
+		s.add("banana");
+		s.add("dog");
+		s.add("salamander");
+		s.add("wolf");
+		Exception e1 = assertThrows(IndexOutOfBoundsException.class, () -> s.get(-1));
+		assertEquals("Invalid index.", e1.getMessage());
+		Exception e2 = assertThrows(IndexOutOfBoundsException.class, () -> s.get(5));
+		assertEquals("Invalid index.", e2.getMessage());
+		assertEquals("apple", s.get(0));
 	}
 
 	/**
@@ -84,7 +184,13 @@ class SwapListTest {
 	 */
 	@Test
 	void testSize() {
-		fail("Not yet implemented");
+		SwapList<String> s = new SwapList<String>();
+		s.add("apple");
+		s.add("banana");
+		s.add("dog");
+		s.add("salamander");
+		s.add("wolf");
+		assertEquals(5, s.size());
 	}
 
 }

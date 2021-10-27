@@ -16,7 +16,8 @@ class LogTest {
 	 */
 	@Test
 	void testLog() {
-		fail("Not yet implemented");
+		Log<String> l = new Log<String>();
+		assertEquals(0, l.size());
 	}
 
 	/**
@@ -24,7 +25,20 @@ class LogTest {
 	 */
 	@Test
 	void testAdd() {
-		fail("Not yet implemented");
+		Log<String> l = new Log<String>();
+		l.add("first");
+		assertEquals(1, l.size());
+		assertThrows(NullPointerException.class, () -> l.add(null));
+		l.add("second");
+		l.add("third");
+		l.add("fifth");
+		l.add("sixth");
+		l.add("seventh");
+		l.add("eighth");
+		l.add("ninth");
+		l.add("tenth");
+		l.add("eleventh");
+		l.add("twelfth");
 	}
 
 	/**
@@ -32,7 +46,23 @@ class LogTest {
 	 */
 	@Test
 	void testGet() {
-		fail("Not yet implemented");
+		Log<String> l = new Log<String>();
+		l.add("first");
+		l.add("second");
+		l.add("third");
+		l.add("fifth");
+		l.add("sixth");
+		l.add("seventh");
+		l.add("eighth");
+		l.add("ninth");
+		l.add("tenth");
+		l.add("eleventh");
+		l.add("twelfth");
+		assertThrows(IndexOutOfBoundsException.class, () -> l.get(-1));
+		assertThrows(IndexOutOfBoundsException.class, () -> l.get(l.size()));
+		assertEquals("first", l.get(0));
+		assertEquals("fifth", l.get(3));
+		assertEquals("twelfth", l.get(10));
 	}
 
 	/**
@@ -40,7 +70,10 @@ class LogTest {
 	 */
 	@Test
 	void testSize() {
-		fail("Not yet implemented");
+		Log<String> l = new Log<String>();
+		assertEquals(0, l.size());
+		l.add("first");
+		assertEquals(1, l.size());
 	}
 
 }

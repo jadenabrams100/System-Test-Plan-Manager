@@ -74,8 +74,9 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	}
 
 	/**
-	 * Helper method, documentation unavailable
+	 * Checks whether an index is out of bounds or not
 	 * @param idx the index to check.
+	 * @throws IndexOutOfBoundsException if index is invalid
 	 */
 	private void checkIndex(int idx) {
 		// TODO: Auto-generated method stub

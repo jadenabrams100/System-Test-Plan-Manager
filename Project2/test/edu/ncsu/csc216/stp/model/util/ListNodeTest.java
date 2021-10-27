@@ -19,7 +19,10 @@ class ListNodeTest {
 	 */
 	@Test
 	void testListNode() {
-		fail("Not yet implemented");
+		ListNode<String> n = new ListNode<String>("String",null);
+		assertEquals("String", n.data);
+		assertNull(n.next);
+		
 	}
 
 }

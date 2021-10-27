@@ -25,10 +25,25 @@ public class Log<E> implements ILog<E> {
 	/**
 	 * adds an element to the log
 	 * @param element the element to add
+	 * @throws IllegalArgumentException if element is null
 	 */
 	@Override
 	public void add(E element) {
-		// TODO Auto-generated method stub
+		if(element == null) {
+			throw new NullPointerException("Cannot add null element.");
+		}
+		try {
+			log[size] = element;
+			size++;
+		} catch(IndexOutOfBoundsException e) {
+			E[] newLog = (E[]) new Object[size * 2];
+			for(int i = 0; i < size; i++) {
+				newLog[i] = log[i];
+			}
+			log = newLog;
+			log[size] = element;
+			size++;
+		}
 		
 	}
 
@@ -39,8 +54,10 @@ public class Log<E> implements ILog<E> {
 	 */
 	@Override
 	public E get(int idx) {
-		// TODO Auto-generated method stub
-		return null;
+		if(idx < 0 || idx > size-1) {
+			throw new IndexOutOfBoundsException("Invalid index.");
+		}
+		return log[idx];
 	}
 
 	/**
@@ -51,5 +68,7 @@ public class Log<E> implements ILog<E> {
 	public int size() {
 		return size;
 	}
+	
+	
 
 }
