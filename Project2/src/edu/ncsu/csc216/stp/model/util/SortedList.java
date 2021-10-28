@@ -1,7 +1,6 @@
 package edu.ncsu.csc216.stp.model.util;
 
 
-
 /**
  * Sorted List Class
  * @author Jaden Abrams
@@ -79,8 +78,22 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	 */
 	@Override
 	public E remove(int idx) {
-		// TODO Auto-generated method stub
-		return null;
+		checkIndex(idx);
+		E removed = null;
+		if (idx == 0) {
+			removed = (E) front.data;
+			front = front.next;
+		}
+		else {
+			ListNode current = front;
+			for (int i = 0; i < idx - 1; i++) {
+				current = current.next;
+			}
+			removed = (E) current.next.data;
+			current.next = current.next.next;
+		}
+		size--;
+		return removed;
 	}
 	
 	/**
