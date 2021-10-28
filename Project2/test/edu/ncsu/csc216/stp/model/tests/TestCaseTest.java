@@ -14,13 +14,37 @@ import org.junit.jupiter.api.Test;
  *
  */
 class TestCaseTest {
+	
+	private final String ID = "TestTimeUpperBound";
+	
+	private final String TYPE = "Boundary Analysis";
+	
+	private final String DESCRIPTION = "Set the time to 4:60";
+	
+	private final String RESULTS = "Invalid Time Entered";
 
 	/**
 	 * Test method for TestCases contstructor
 	 */
 	@Test
 	void testTestCase() {
-		fail("Not yet implemented");
+		assertDoesNotThrow(() -> new TestCase(ID, TYPE, DESCRIPTION, RESULTS));
+		Exception e1 = assertThrows(IllegalArgumentException.class, () -> new TestCase(null, TYPE, DESCRIPTION, RESULTS));
+		assertEquals("Invalid test information.", e1.getMessage());
+		Exception e2 = assertThrows(IllegalArgumentException.class, () -> new TestCase("", TYPE, DESCRIPTION, RESULTS));
+		assertEquals("Invalid test information.", e2.getMessage());
+		Exception e3 = assertThrows(IllegalArgumentException.class, () -> new TestCase(ID, null, DESCRIPTION, RESULTS));
+		assertEquals("Invalid test information.", e3.getMessage());
+		Exception e4 = assertThrows(IllegalArgumentException.class, () -> new TestCase(ID, "", DESCRIPTION, RESULTS));
+		assertEquals("Invalid test information.", e4.getMessage());
+		Exception e5 = assertThrows(IllegalArgumentException.class, () -> new TestCase(ID, TYPE, null, RESULTS));
+		assertEquals("Invalid test information.", e5.getMessage());
+		Exception e6 = assertThrows(IllegalArgumentException.class, () -> new TestCase(ID, TYPE, "", RESULTS));
+		assertEquals("Invalid test information.", e6.getMessage());
+		Exception e7 = assertThrows(IllegalArgumentException.class, () -> new TestCase(ID, TYPE, DESCRIPTION, null));
+		assertEquals("Invalid test information.", e7.getMessage());
+		Exception e8 = assertThrows(IllegalArgumentException.class, () -> new TestCase(ID, TYPE, DESCRIPTION, ""));
+		assertEquals("Invalid test information.", e8.getMessage());
 	}
 
 	/**
@@ -28,7 +52,10 @@ class TestCaseTest {
 	 */
 	@Test
 	void testAddTestResult() {
-		fail("Not yet implemented");
+		TestCase t = new TestCase(ID, TYPE, DESCRIPTION, RESULTS);
+		assertDoesNotThrow(() -> t.addTestResult(false, RESULTS));
+		Exception e1 = assertThrows(IllegalArgumentException.class, () -> t.addTestResult(false, null));
+		assertEquals("Invalid test results", e1.getMessage());
 	}
 
 	/**
@@ -36,7 +63,8 @@ class TestCaseTest {
 	 */
 	@Test
 	void testGetTestCaseId() {
-		fail("Not yet implemented");
+		TestCase t = new TestCase(ID, TYPE, DESCRIPTION, RESULTS);
+		assertEquals(ID, t.getTestCaseId());
 	}
 
 	/**
@@ -44,7 +72,9 @@ class TestCaseTest {
 	 */
 	@Test
 	void testGetTestType() {
-		fail("Not yet implemented");
+		TestCase t = new TestCase(ID, TYPE, DESCRIPTION, RESULTS);
+		assertEquals(TYPE, t.getTestType());
+		
 	}
 
 	/**

@@ -20,7 +20,11 @@ class TestResultTest {
 	 */
 	@Test
 	void testTestResult() {
-		fail("Not yet implemented");
+		assertDoesNotThrow(() -> new TestResult(true, "GUI opens"));
+		Exception e1 = assertThrows(IllegalArgumentException.class, () -> new TestResult(true, null));
+		assertEquals("Invalid test results.", e1.getMessage());
+		Exception e2 = assertThrows(IllegalArgumentException.class, () -> new TestResult(true, ""));
+		assertEquals("Invalid test results.", e2.getMessage());
 	}
 
 	/**
@@ -28,7 +32,9 @@ class TestResultTest {
 	 */
 	@Test
 	void testGetActualResults() {
-		fail("Not yet implemented");
+		TestResult t = new TestResult(true, "GUI opens");
+		assertEquals("GUI opens", t.getActualResults());
+		
 	}
 
 	/**
@@ -36,7 +42,8 @@ class TestResultTest {
 	 */
 	@Test
 	void testIsPassing() {
-		fail("Not yet implemented");
+		TestResult t = new TestResult(true, "GUI opens");
+		assertTrue(t.isPassing());
 	}
 
 	/**
@@ -44,7 +51,10 @@ class TestResultTest {
 	 */
 	@Test
 	void testToString() {
-		fail("Not yet implemented");
+		TestResult t = new TestResult(true, "GUI opens");
+		TestResult t2 = new TestResult(false, "Crashes computer");
+		assertEquals("PASS: GUI opens", t.toString());
+		assertEquals("FAIL: Crashes computer", t2.toString());
 	}
 
 }

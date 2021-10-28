@@ -22,7 +22,8 @@ public class TestResult {
 	 * @param actualResults the results of the test
 	 */
 	public TestResult(boolean passing, String actualResults) {
-		// TODO: Auto-generated method stub
+		setPassing(passing);
+		setActualResults(actualResults);
 	}
 	
 	/**
@@ -30,7 +31,7 @@ public class TestResult {
 	 * @return the result
 	 */
 	public String getActualResults() {
-		return null;
+		return actualResults;
 	}
 
 	/**
@@ -38,7 +39,10 @@ public class TestResult {
 	 * @param actualResults the result to set
 	 */
 	private void setActualResults(String actualResults) {
-		// TODO: Auto-generated method stub
+		if(actualResults == null || actualResults.length() == 0) {
+			throw new IllegalArgumentException("Invalid test results.");
+		}
+		this.actualResults = actualResults;
 	}
 	
 	/**
@@ -46,7 +50,7 @@ public class TestResult {
 	 * @return if it is passing
 	 */
 	public boolean isPassing() {
-		return false;
+		return passing;
 	}
 	
 	/**
@@ -54,7 +58,7 @@ public class TestResult {
 	 * @param isPassing if the test is passing
 	 */
 	private void setPassing(boolean isPassing) {
-		// TODO: Auto-generated method stub
+		passing = isPassing;
 	}
 	
 	/**
@@ -62,6 +66,9 @@ public class TestResult {
 	 * @return the string of the result
 	 */
 	public String toString() {
-		return null;
+		if(passing) {
+			return PASS + ": " + getActualResults();
+		}
+		return FAIL + ": " + getActualResults();
 	}
 }
