@@ -39,17 +39,8 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 			size++;
 		}
 		else {
-			// checks if first element is same as front element
-			ListNode<E> check = front;
-			if(check.data.equals(element)) {
+			if(this.contains(element)) {
 				throw new IllegalArgumentException("Cannot add duplicate element");
-			}
-			// iterate through list to see if data equals element
-			while(check.next != null) {
-				if(check.data.equals(element)) {
-					throw new IllegalArgumentException("Cannot add duplicate element");
-				}
-				check = check.next;
 			}
 			// reset list copy
 			ListNode<E> current = front;
@@ -64,10 +55,11 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 					if(element.compareTo(current.next.data) < 0) {
 						current.next = new ListNode<E>(element, current.next);
 						size++;
+						break;
 					}
-					else {
+					
 						current = current.next;
-					}
+					
 				}
 				// add to end of list if at end of list and element should go after last element
 				if(current.next == null && element.compareTo(current.data) > 0) {
@@ -98,7 +90,26 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	 */
 	@Override
 	public boolean contains(E element) {
-		// TODO Auto-generated method stub
+		if(element == null) {
+			return false;
+		}
+		// checks if first element is same as front element
+					ListNode<E> check = front;
+					if(check.data.equals(element)) {
+						return true;
+					}
+					// iterate through list to see if data equals element
+					while(check.next != null) {
+						if(check.data.equals(element)) {
+							return true;
+						}
+						check = check.next;
+					}
+					if(check.next == null) {
+						if(check.data.equals(element)) {
+							return true;
+						}
+					}
 		return false;
 	}
 	/**

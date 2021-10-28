@@ -84,7 +84,13 @@ class SortedListTest {
 		assertFalse(s.contains(null));
 		s.add("cat");
 		assertTrue(s.contains("cat"));
+		s.add("banana");
+		s.add("dog");
+		s.add("salamander");
+		s.add("wolf");
 		assertFalse(s.contains("null"));
+		assertTrue(s.contains("dog"));
+		assertTrue(s.contains("wolf"));
 	}
 
 	/**
