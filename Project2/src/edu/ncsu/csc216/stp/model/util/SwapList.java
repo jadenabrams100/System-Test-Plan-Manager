@@ -42,8 +42,15 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public E remove(int idx) {
-		// TODO Auto-generated method stub
-		return null;
+		checkIndex(idx);
+		E rtn = list[idx];
+		for (int i = idx; i < size; i++) {
+			list[i] = list[i + 1];
+		}
+		list[size - 1] = null;
+		size--;
+		return rtn;
+		
 	}
 
 	/**
