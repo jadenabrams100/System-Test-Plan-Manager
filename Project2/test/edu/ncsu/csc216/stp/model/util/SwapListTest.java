@@ -38,6 +38,13 @@ class SwapListTest {
 		s.add("dog");
 		s.add("salamander");
 		s.add("wolf");
+		s.add("parrot");
+		s.add("orangatan");
+		s.add("cat");
+		s.add("ninth");
+		s.add("tenth");
+		s.add("eleventh");
+		s.add("null");
 	}
 
 	/**

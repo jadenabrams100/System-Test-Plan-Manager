@@ -59,7 +59,13 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public void moveUp(int idx) {
-		// TODO Auto-generated method stub
+		checkIndex(idx);
+		if(idx != 0) {
+			//do everything
+			E temp = (E) list[idx];
+			list[idx] = list[idx-1];
+			list[idx-1] = temp;
+		}
 	}
 
 	/**
@@ -68,7 +74,12 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public void moveDown(int idx) {
-		// TODO Auto-generated method stub
+		checkIndex(idx);
+		if(idx != size-1) {
+			E temp = (E) list[idx];
+			list[idx] = list[idx+1];
+			list[idx+1] = temp;
+		}
 	}
 
 	/**
@@ -77,7 +88,15 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public void moveToFront(int idx) {
-		// TODO Auto-generated method stub
+		checkIndex(idx);
+		if(idx != 0) {
+			E temp = (E) list[idx];
+			list[idx] = list[idx-1];
+			for(int i = 0; i < idx-1; i++) {
+				list[i+1] = list[i];
+			}
+			list[0] = temp;
+		}
 	}
 
 	/**
@@ -86,6 +105,15 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public void moveToBack(int idx) {
+		checkIndex(idx);
+		if(idx != size-1) {
+			E temp = (E) list[idx];
+			list[idx] = list[idx+1];
+			for(int i = size-1; i > idx+1; i--) {
+				list[i-1] = list[i];
+			}
+			list[size-1] = temp;
+		}
 		// TODO Auto-generated method stub
 	}
 
