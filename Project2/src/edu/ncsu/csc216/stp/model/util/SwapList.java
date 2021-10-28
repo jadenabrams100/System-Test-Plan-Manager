@@ -27,7 +27,12 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public void add(E element) {
-		// TODO Auto-generated method stub
+		if(element == null) {
+			throw new NullPointerException("Cannot add null element.");
+		}
+		checkCapacity(size);
+		list[size] = element;
+		size++;
 	}
 
 	/**
@@ -84,8 +89,9 @@ public class SwapList<E> implements ISwapList<E> {
 	 */
 	@Override
 	public E get(int idx) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		checkIndex(idx);
+		return list[idx];
 	}
 
 	/**
@@ -98,19 +104,27 @@ public class SwapList<E> implements ISwapList<E> {
 	}
 	
 	/**
-	 * Helper Method, documentation unavailable
-	 * @param i Documentation Pending
+	 * checks whether the array is at capacity and grows the array if need be
+	 * @param idx the capacity
 	 */
 	private void checkCapacity(int i) {
-		// TODO: Auto-generated method stub
+		if(i == list.length) {
+			E[] newList = (E[]) new Object[size * 2];
+			for(int idx = 0; i < size; i++) {
+				newList[idx] = list[idx];
+			}
+			list = newList;
+		}
 	}
 	
 	/**
-	 * Helper Method, documentation unavailable
-	 * @param i the index to check
+	 * Checks whether the index is valid
+	 * @param idx the index to check
 	 */
-	private void checkIndex(int i) {
-		// TODO: Auto-generated method stub
+	private void checkIndex(int idx) {
+		if(idx < 0 || idx > size-1) {
+			throw new IndexOutOfBoundsException("Invalid index.");
+		}
 	}
 
 }
