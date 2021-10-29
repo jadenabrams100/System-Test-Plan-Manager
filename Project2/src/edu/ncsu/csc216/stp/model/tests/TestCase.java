@@ -129,7 +129,7 @@ public class TestCase {
 	public String getActualResultsLog() {
 		String rtn = "";
 		for(int i = 0; i < results.size(); i++) {
-			rtn = rtn + "-" + results.get(i).toString() + "\n";
+			rtn = rtn + "- " + results.get(i).toString() + "\n";
 		}
 		return rtn;
 	}
@@ -161,7 +161,7 @@ public class TestCase {
 	 */
 	private void setTestCaseId(String id) {
 		if(id == null || id.length() == 0) {
-			throw new IllegalArgumentException("Invalid Test information");
+			throw new IllegalArgumentException("Invalid test information.");
 		}
 		testCaseId = id;
 	}
@@ -173,7 +173,7 @@ public class TestCase {
 	 */
 	private void setTestType(String t) {
 		if(t == null || t.length() == 0) {
-			throw new IllegalArgumentException("Invalid Test information");
+			throw new IllegalArgumentException("Invalid test information.");
 		}
 		testType = t;
 	}
@@ -185,7 +185,7 @@ public class TestCase {
 	 */
 	private void setTestDescription(String d) {
 		if(d == null || d.length() == 0) {
-			throw new IllegalArgumentException("Invalid Test information");
+			throw new IllegalArgumentException("Invalid test information.");
 		}
 		testDescription = d;
 	}
@@ -197,7 +197,7 @@ public class TestCase {
 	 */
 	private void setExpectedResults(String r) {
 		if(r == null || r.length() == 0) {
-			throw new IllegalArgumentException("Invalid Test information");
+			throw new IllegalArgumentException("Invalid test information.");
 		}
 		expectedResults = r;
 	}

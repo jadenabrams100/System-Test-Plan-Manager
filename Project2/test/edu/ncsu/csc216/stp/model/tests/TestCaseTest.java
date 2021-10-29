@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import edu.ncsu.csc216.stp.model.test_plans.TestPlan;
+
 /**
  * Ensures that TestCase works as intended
  * @author Jaden Abrams
@@ -55,7 +57,7 @@ class TestCaseTest {
 		TestCase t = new TestCase(ID, TYPE, DESCRIPTION, RESULTS);
 		assertDoesNotThrow(() -> t.addTestResult(false, RESULTS));
 		Exception e1 = assertThrows(IllegalArgumentException.class, () -> t.addTestResult(false, null));
-		assertEquals("Invalid test results", e1.getMessage());
+		assertEquals("Invalid test results.", e1.getMessage());
 	}
 
 	/**
@@ -82,7 +84,8 @@ class TestCaseTest {
 	 */
 	@Test
 	void testGetTestDescription() {
-		fail("Not yet implemented");
+		TestCase t = new TestCase(ID, TYPE, DESCRIPTION, RESULTS);
+		assertEquals(DESCRIPTION, t.getTestDescription());
 	}
 
 	/**
@@ -90,7 +93,8 @@ class TestCaseTest {
 	 */
 	@Test
 	void testGetExpectedResults() {
-		fail("Not yet implemented");
+		TestCase t = new TestCase(ID, TYPE, DESCRIPTION, RESULTS);
+		assertEquals(RESULTS, t.getExpectedResults());
 	}
 
 	/**
@@ -98,7 +102,9 @@ class TestCaseTest {
 	 */
 	@Test
 	void testGetResults() {
-		fail("Not yet implemented");
+		TestCase t = new TestCase(ID, TYPE, DESCRIPTION, RESULTS);
+		t.addTestResult(true, RESULTS);
+		assertEquals(TestResult.PASS + ": " + RESULTS, t.getResults().get(0).toString());
 	}
 
 	/**
@@ -106,7 +112,9 @@ class TestCaseTest {
 	 */
 	@Test
 	void testGetTestPlan() {
-		fail("Not yet implemented");
+		TestCase t = new TestCase(ID, TYPE, DESCRIPTION, RESULTS);
+		t.setTestPlan(new TestPlan("cool plan"));
+		assertEquals("cool plan", t.getTestPlan().getTestPlanName());
 	}
 
 	/**
@@ -114,7 +122,12 @@ class TestCaseTest {
 	 */
 	@Test
 	void testIsTestCasePassing() {
-		fail("Not yet implemented");
+		TestCase t = new TestCase(ID, TYPE, DESCRIPTION, RESULTS);
+		assertFalse(t.isTestCasePassing());
+		t.addTestResult(false, "GUI crashes");
+		assertFalse(t.isTestCasePassing());
+		t.addTestResult(true, RESULTS);
+		assertTrue(t.isTestCasePassing());
 	}
 
 	/**
@@ -122,7 +135,10 @@ class TestCaseTest {
 	 */
 	@Test
 	void testGetStatus() {
-		fail("Not yet implemented");
+		TestCase t = new TestCase(ID, TYPE, DESCRIPTION, RESULTS);
+		assertEquals(TestResult.FAIL, t.getStatus());
+		t.addTestResult(true, RESULTS);
+		assertEquals(TestResult.PASS, t.getStatus());
 	}
 
 	/**
@@ -130,7 +146,9 @@ class TestCaseTest {
 	 */
 	@Test
 	void testGetActualResultsLog() {
-		fail("Not yet implemented");
+		TestCase t = new TestCase(ID, TYPE, DESCRIPTION, RESULTS);
+		t.addTestResult(true, RESULTS);
+		assertEquals("- PASS: " + RESULTS + "\n", t.getActualResultsLog());
 	}
 
 	/**
@@ -138,7 +156,9 @@ class TestCaseTest {
 	 */
 	@Test
 	void testSetTestPlan() {
-		fail("Not yet implemented");
+		TestCase t = new TestCase(ID, TYPE, DESCRIPTION, RESULTS);
+		assertDoesNotThrow(() -> t.setTestPlan(new TestPlan("cool plan")));
+		assertThrows(IllegalArgumentException.class, () -> t.setTestPlan(null));
 	}
 
 	/**
@@ -146,7 +166,10 @@ class TestCaseTest {
 	 */
 	@Test
 	void testToString() {
-		fail("Not yet implemented");
+		TestCase t = new TestCase(ID, TYPE, DESCRIPTION, RESULTS);
+		t.addTestResult(true, RESULTS);
+		String expected = "# " + ID + "," + TYPE + "\n* " + DESCRIPTION + "\n* " + RESULTS + "\n" + t.getActualResultsLog();
+		assertEquals(expected, t.toString());
 	}
 
 }
