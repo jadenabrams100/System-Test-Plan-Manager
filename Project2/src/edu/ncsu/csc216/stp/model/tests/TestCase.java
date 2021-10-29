@@ -2,6 +2,7 @@ package edu.ncsu.csc216.stp.model.tests;
 
 import edu.ncsu.csc216.stp.model.test_plans.TestPlan;
 import edu.ncsu.csc216.stp.model.util.ILog;
+import edu.ncsu.csc216.stp.model.util.Log;
 
 /**
  * Contains information about each individual test case.
@@ -28,7 +29,12 @@ public class TestCase {
 	 * @param expectedResults the expected results of the Test Case
 	 */
 	public TestCase(String testCaseId, String testType, String testDescription, String expectedResults) {
-		// TODO: Auto-generated method stub
+		setTestCaseId(testCaseId);
+		setTestType(testType);
+		setTestDescription(testDescription);
+		setExpectedResults(expectedResults);
+		results = new Log<TestResult>();
+		plan = null;
 	}
 
 	/**
@@ -38,7 +44,11 @@ public class TestCase {
 	 * @throws IllegalArgumentException if the TestResult cannot be constructed.
 	 */
 	public void addTestResult(boolean passing, String result) {
-		// TODO: Auto-generated method stub
+		try {
+			results.add(new TestResult(passing, result));
+		} catch(Exception e) {
+			throw new IllegalArgumentException("Invalid test results.");
+		}
 	}
 
 	/**
@@ -95,7 +105,10 @@ public class TestCase {
 	 * @return true if the Test Case is passing, false otherwise.
 	 */
 	public boolean isTestCasePassing() {
-		return false;
+		if(results.size() == 0) {
+			return false;
+		}
+		return results.get(results.size()-1).isPassing();
 	}
 
 	/**
@@ -103,7 +116,10 @@ public class TestCase {
 	 * @return "PASS" if the test is passing, "FAIL" if the test is failing.
 	 */
 	public String getStatus() {
-		return null;
+		if(isTestCasePassing()) {
+			return TestResult.PASS;
+		}
+		return TestResult.FAIL;
 	}
 
 	/**
@@ -111,7 +127,11 @@ public class TestCase {
 	 * @return a String version of the Test Result log, with a leading '-' appended to the start of each Test Result.
 	 */
 	public String getActualResultsLog() {
-		return null;
+		String rtn = "";
+		for(int i = 0; i < results.size(); i++) {
+			rtn = rtn + "-" + results.get(i).toString() + "\n";
+		}
+		return rtn;
 	}
 
 	/**
@@ -120,7 +140,10 @@ public class TestCase {
 	 * @throws IllegalArgumentException if the parameter is null.
 	 */
 	public void setTestPlan(TestPlan testPlan) {
-		// TODO: Auto-generated method stub
+		if(testPlan == null) {
+			throw new IllegalArgumentException("Invalid test plan");
+		}
+		plan = testPlan;
 	}
 
 	/**
@@ -128,6 +151,54 @@ public class TestCase {
 	 * @return a String version of the Test Case.
 	 */
 	public String toString() {
-		return null;
+		return "# " + testCaseId + "," + testType + "\n" + "* " + testDescription + "\n" + "* " + expectedResults + "\n" + getActualResultsLog();
+	}
+	
+	/**
+	 * sets the test case id
+	 * @param id the id to set
+	 * @throws IllegalArgumentException if id is null or empty
+	 */
+	private void setTestCaseId(String id) {
+		if(id == null || id.length() == 0) {
+			throw new IllegalArgumentException("Invalid Test information");
+		}
+		testCaseId = id;
+	}
+	
+	/**
+	 * sets the type
+	 * @param t the type to set
+	 * @throws IllegalArgumentException if t is null or empty
+	 */
+	private void setTestType(String t) {
+		if(t == null || t.length() == 0) {
+			throw new IllegalArgumentException("Invalid Test information");
+		}
+		testType = t;
+	}
+	
+	/**
+	 * sets the test description 
+	 * @param d the description to set
+	 * @throws IllegalArgumentException if d is null or empty
+	 */
+	private void setTestDescription(String d) {
+		if(d == null || d.length() == 0) {
+			throw new IllegalArgumentException("Invalid Test information");
+		}
+		testDescription = d;
+	}
+	
+	/**
+	 * sets the test expected results
+	 * @param r the result to set
+	 * @throws IllegalArgumentException if r is null or invalid
+	 */
+	private void setExpectedResults(String r) {
+		if(r == null || r.length() == 0) {
+			throw new IllegalArgumentException("Invalid Test information");
+		}
+		expectedResults = r;
 	}
 }
