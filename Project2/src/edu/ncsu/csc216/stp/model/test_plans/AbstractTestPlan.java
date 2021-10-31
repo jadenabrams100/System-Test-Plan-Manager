@@ -2,6 +2,7 @@ package edu.ncsu.csc216.stp.model.test_plans;
 
 import edu.ncsu.csc216.stp.model.tests.TestCase;
 import edu.ncsu.csc216.stp.model.util.ISwapList;
+import edu.ncsu.csc216.stp.model.util.SwapList;
 
 import java.util.Objects;
 
@@ -22,7 +23,8 @@ public abstract class AbstractTestPlan {
 	 * @throws IllegalArgumentException if the Test Plan name is null or an empty string.
 	 */
 	public AbstractTestPlan(String testPlanName) {
-		// TODO: Auto-generated method stub
+		setTestPlanName(testPlanName);
+		cases = new SwapList<>();
 	}
 
 	/**
@@ -31,7 +33,9 @@ public abstract class AbstractTestPlan {
 	 * @throws IllegalArgumentException if the name is null or an empty String.
 	 */
 	public void setTestPlanName(String testPlanName) {
-		// TODO: Auto-generated method stub
+		if(testPlanName == null || "".equals(testPlanName))
+			throw new IllegalArgumentException("Invalid name.");
+		this.testPlanName = testPlanName;
 	}
 
 	/**
@@ -40,7 +44,7 @@ public abstract class AbstractTestPlan {
 	 * @param t the Test Case to add to the list.
 	 */
 	public void addTestCase(TestCase t) {
-		// TODO: Auto-generated method stub
+		cases.add(t);
 	}
 
 	/**
@@ -65,7 +69,7 @@ public abstract class AbstractTestPlan {
 	 * @return the Test Case
 	 */
 	public TestCase getTestCase(int idx) {
-		return null;
+		return cases.get(idx);
 	}
 
 	/**
@@ -75,7 +79,7 @@ public abstract class AbstractTestPlan {
 	 * @return the removed Test Case.
 	 */
 	public TestCase removeTestCase(int idx) {
-		return null;
+		return cases.remove(idx);
 	}
 
 	/**
@@ -83,7 +87,12 @@ public abstract class AbstractTestPlan {
 	 * @return an integer representing the number of failing Test Cases.
 	 */
 	public int getNumberOfFailingTests() {
-		return 0;
+		int count = 0;
+		for (int i = 0; i < cases.size(); i++) {
+			if(!cases.get(i).isTestCasePassing())
+				count++;
+		}
+		return count;
 	}
 
 	/**
@@ -93,7 +102,7 @@ public abstract class AbstractTestPlan {
 	 * @param actualResults the results description to add to the Test Case.
 	 */
 	public void addTestResult(int idx, boolean passing, String actualResults) {
-		// TODO: Auto-generated method stub
+		cases.get(idx).addTestResult(passing, actualResults);
 	}
 
 	/**

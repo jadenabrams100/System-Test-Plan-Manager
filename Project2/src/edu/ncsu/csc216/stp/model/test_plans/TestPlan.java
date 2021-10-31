@@ -24,7 +24,13 @@ public class TestPlan extends AbstractTestPlan implements Comparable<TestPlan> {
 	 * @return a 2D String Array containing Test Case data.
 	 */
 	public String[][] getTestCasesAsArray() {
-		return null;
+		String[][] arrayBuilder = new String[cases.size()][3];
+		for (int i = 0; i < cases.size(); i++) {
+			arrayBuilder[i][0] = cases.get(i).getTestCaseId();
+			arrayBuilder[i][1] = cases.get(i).getTestType();
+			arrayBuilder[i][2] = cases.get(i).getStatus();
+		}
+		return arrayBuilder;
 	}
 
 	/**
@@ -32,7 +38,8 @@ public class TestPlan extends AbstractTestPlan implements Comparable<TestPlan> {
 	 * @param t the Test Case to add.
 	 */
 	public void addTestCase(TestCase t) {
-		// TODO: Auto-generated method stub
+		cases.add(t);
+		cases.get(cases.size() - 1).setTestPlan(this);
 	}
 
 	/**
