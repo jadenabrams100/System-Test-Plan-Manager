@@ -34,11 +34,23 @@ public class TestPlan extends AbstractTestPlan implements Comparable<TestPlan> {
 	}
 
 	/**
+	 * Sets the name of the Test Plan
+	 * Overridden to add check for if the name matches "Failing Tests" case insensitive
+	 * @param testPlanName the new name of the Test Plan
+	 */
+	@Override
+	public void setTestPlanName(String testPlanName) {
+		if("Failing Tests".equalsIgnoreCase(testPlanName))
+			throw new IllegalArgumentException("Invalid name.");
+		super.setTestPlanName(testPlanName);
+	}
+
+	/**
 	 * Adds a test case to the end of the list., and sets the Test Case's TestPlan to the current TestPlan.
 	 * @param t the Test Case to add.
 	 */
 	public void addTestCase(TestCase t) {
-		cases.add(t);
+		super.addTestCase(t);
 		cases.get(cases.size() - 1).setTestPlan(this);
 	}
 
@@ -48,6 +60,6 @@ public class TestPlan extends AbstractTestPlan implements Comparable<TestPlan> {
 	 * @return documentation pending.
 	 */
 	public int compareTo(TestPlan t) {
-		return 0;
+		return testPlanName.toLowerCase().compareTo(t.getTestPlanName().toLowerCase());
 	}
 }

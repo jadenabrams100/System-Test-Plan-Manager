@@ -44,6 +44,8 @@ public abstract class AbstractTestPlan {
 	 * @param t the Test Case to add to the list.
 	 */
 	public void addTestCase(TestCase t) {
+		if(t == null)
+			throw new IllegalArgumentException("Invalid test information.");
 		cases.add(t);
 	}
 
@@ -118,11 +120,11 @@ public abstract class AbstractTestPlan {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		AbstractTestPlan that = (AbstractTestPlan) o;
-		return testPlanName.equals(that.testPlanName) && Objects.equals(cases, that.cases);
+		return getTestPlanName().equalsIgnoreCase(that.getTestPlanName());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(testPlanName, cases);
+		return Objects.hash(getTestPlanName().toLowerCase());
 	}
 }

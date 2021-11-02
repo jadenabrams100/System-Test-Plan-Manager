@@ -1,14 +1,11 @@
-/**
- * 
- */
 package edu.ncsu.csc216.stp.model.test_plans;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
 
 import edu.ncsu.csc216.stp.model.tests.TestCase;
 import edu.ncsu.csc216.stp.model.tests.TestResult;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Ensures that TestPlan works properly
@@ -34,7 +31,7 @@ class TestTestPlan {
 	void testGetTestCasesAsArray() {
 		TestPlan t = new TestPlan("Not Your Mother's Test Plan");
 		t.addTestCase(new TestCase("testGUI", "Acceptance", "Ensure the GUI loads properly", "GUI loads properly"));
-		TestCase b = new TestCase("loadContents", "IO analysis", "Ensures program loads files right", "Files load right");
+		TestCase b = new TestCase("loadContents", "IO Analysis", "Ensures program loads files right", "Files load right");
 		b.addTestResult(true, "Files load properly");
 		t.addTestCase(b);
 		String [][] testArray = t.getTestCasesAsArray();
@@ -71,8 +68,8 @@ class TestTestPlan {
 		TestPlan p3 = new TestPlan(s3);
 		TestPlan p4 = new TestPlan(s4);
 		assertEquals(0, p1.compareTo(p4));
-		assertEquals(s1.compareTo(s2), p1.compareTo(p2));
-		assertEquals(s2.compareTo(s3), p2.compareTo(p3));
+		assertEquals(s1.toLowerCase().compareTo(s2.toLowerCase()), p1.compareTo(p2));
+		assertEquals(s2.toLowerCase().compareTo(s3.toLowerCase()), p2.compareTo(p3));
 	}
 
 }
