@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 public abstract class AbstractTestPlan {
 	/** Stores the name of the Test Plan */
-	String testPlanName;
+	private String testPlanName;
 	/** Stores the Test Cases in the Test Plan */
 	ISwapList<TestCase> cases;
 

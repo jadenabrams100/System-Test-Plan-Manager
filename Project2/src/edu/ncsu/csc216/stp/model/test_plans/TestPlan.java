@@ -24,11 +24,11 @@ public class TestPlan extends AbstractTestPlan implements Comparable<TestPlan> {
 	 * @return a 2D String Array containing Test Case data.
 	 */
 	public String[][] getTestCasesAsArray() {
-		String[][] arrayBuilder = new String[cases.size()][3];
-		for (int i = 0; i < cases.size(); i++) {
-			arrayBuilder[i][0] = cases.get(i).getTestCaseId();
-			arrayBuilder[i][1] = cases.get(i).getTestType();
-			arrayBuilder[i][2] = cases.get(i).getStatus();
+		String[][] arrayBuilder = new String[getTestCases().size()][3];
+		for (int i = 0; i < getTestCases().size(); i++) {
+			arrayBuilder[i][0] = getTestCases().get(i).getTestCaseId();
+			arrayBuilder[i][1] = getTestCases().get(i).getTestType();
+			arrayBuilder[i][2] = getTestCases().get(i).getStatus();
 		}
 		return arrayBuilder;
 	}
@@ -51,7 +51,7 @@ public class TestPlan extends AbstractTestPlan implements Comparable<TestPlan> {
 	 */
 	public void addTestCase(TestCase t) {
 		super.addTestCase(t);
-		cases.get(cases.size() - 1).setTestPlan(this);
+		getTestCases().get(getTestCases().size() - 1).setTestPlan(this);
 	}
 
 	/**
@@ -60,6 +60,6 @@ public class TestPlan extends AbstractTestPlan implements Comparable<TestPlan> {
 	 * @return documentation pending.
 	 */
 	public int compareTo(TestPlan t) {
-		return testPlanName.toLowerCase().compareTo(t.getTestPlanName().toLowerCase());
+		return getTestPlanName().toLowerCase().compareTo(t.getTestPlanName().toLowerCase());
 	}
 }

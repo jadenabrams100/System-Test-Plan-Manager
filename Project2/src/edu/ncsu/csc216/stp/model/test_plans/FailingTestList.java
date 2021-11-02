@@ -1,6 +1,7 @@
 package edu.ncsu.csc216.stp.model.test_plans;
 
 import edu.ncsu.csc216.stp.model.tests.TestCase;
+import edu.ncsu.csc216.stp.model.util.SwapList;
 
 /**
  * Test Plan used to store failing Tests
@@ -25,7 +26,9 @@ public class FailingTestList extends AbstractTestPlan {
 	 * @throws IllegalArgumentException if the test case is not failing.
 	 */
 	public void addTestCase(TestCase t) {
-		// TODO: Auto-generated method stub
+		if(t.isTestCasePassing())
+			throw new IllegalArgumentException("Cannot add passing test case.");
+		cases.add(t);
 	}
 
 	/**
@@ -34,7 +37,9 @@ public class FailingTestList extends AbstractTestPlan {
 	 * @throws IllegalArgumentException if the name does not match the expected name (case-insensitive).
 	 */
 	public void setTestPlanName(String testPlanName) {
-		// TODO: Auto-generated method stub
+		if(!testPlanName.equalsIgnoreCase(FAILING_TEST_LIST_NAME))
+			throw new IllegalArgumentException("Invalid name.");
+		super.setTestPlanName(testPlanName);
 	}
 
 	/**
@@ -44,13 +49,24 @@ public class FailingTestList extends AbstractTestPlan {
 	 * @return a 2D String Array containing Test Case data.
 	 */
 	public String[][] getTestCasesAsArray() {
-		return null;
+		String[][] arrayBuilder = new String[getTestCases().size()][3];
+		for (int i = 0; i < getTestCases().size(); i++) {
+			TestCase temp = getTestCases().get(i);
+			arrayBuilder[i][0] = temp.getTestCaseId();
+			arrayBuilder[i][1] = temp.getTestType();
+			if(temp.getTestPlan() == null) {
+				arrayBuilder[i][2] = "";
+			} else {
+				arrayBuilder[i][2] = temp.getTestPlan().getTestPlanName();
+			}
+		}
+		return arrayBuilder;
 	}
 
 	/**
 	 * Clears the FailingTestList of all Test Cases.
 	 */
 	public void clearTests() {
-		// TODO: Auto-generated method stub
+		cases = new SwapList<>();
 	}
 }

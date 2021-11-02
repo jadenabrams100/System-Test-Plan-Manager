@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Ensures that TestPlan works properly
- * @author 19194
- *
+ * @author Jaden Abrams
+ * @author Henry Kon
  */
 class TestTestPlan {
 
