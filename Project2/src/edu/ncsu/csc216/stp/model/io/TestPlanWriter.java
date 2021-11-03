@@ -1,6 +1,7 @@
 package edu.ncsu.csc216.stp.model.io;
 
 import edu.ncsu.csc216.stp.model.test_plans.TestPlan;
+import java.io.*;
 import edu.ncsu.csc216.stp.model.util.ISortedList;
 
 import java.io.File;
@@ -17,6 +18,20 @@ public class TestPlanWriter {
 	 * @throws IllegalArgumentException if the method encounters any errors or exceptions.
 	 */
 	public static void writeTestPlanFile(File file, ISortedList<TestPlan> testPlanList) {
-		// TODO: Auto-generated method stub
+		try {
+			PrintStream fileWriter = new PrintStream(file);
+			TestPlan tp = null;
+			for(int i = 0; i < testPlanList.size(); i++) {
+				tp = testPlanList.get(i);
+				fileWriter.println("! " + tp.getTestPlanName());
+				for(int j = 0; j < tp.getTestCases().size(); j++) {
+					fileWriter.print(tp.getTestCase(j));
+				}
+				
+			}
+			fileWriter.close();
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Unable to save file");
+		}
 	}
 }

@@ -30,10 +30,10 @@ class TestTestPlanWriter {
 		ISortedList<TestPlan> list = TestPlanReader.readTestPlansFile(new File("test-files/test-plans1.txt"));
 		TestPlanWriter.writeTestPlanFile(new File("test-files/actual-test-plans.txt"), list);
 		try {
-			Scanner fileReader = new Scanner(new FileInputStream("test-files/test-plans1.txt"));
+			Scanner fileReader = new Scanner(new FileInputStream("test-files/expected-test-plans.txt"));
 			Scanner fileReader2 = new Scanner(new FileInputStream("test-files/actual-test-plans.txt"));
 			while(fileReader.hasNextLine() && fileReader2.hasNextLine()) {
-				assertEquals(fileReader.nextLine(), fileReader2.nextLine());
+				assertEquals(fileReader.nextLine().trim(), fileReader2.nextLine().trim());
 			}
 			if(fileReader.hasNextLine() || fileReader2.hasNextLine()) {
 				fail("One of the files has too many lines");
