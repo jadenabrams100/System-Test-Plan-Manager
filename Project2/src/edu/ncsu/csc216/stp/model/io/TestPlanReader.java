@@ -32,19 +32,22 @@ public class TestPlanReader {
 			if(!fileReader.hasNextLine()) {
 				throw new IllegalArgumentException("Unable to load file.");
 			}
-			fileLine = fileLine + fileReader.nextLine();
+			fileLine = fileLine + fileReader.nextLine() + "\n";
 			if(!fileLine.substring(0, 1).equals("!")) {
 				throw new IllegalArgumentException("Unable to load file.");
 			}
 			while(fileReader.hasNextLine()) {
-				fileLine = fileLine + fileReader.nextLine();
+				fileLine = fileLine + fileReader.nextLine() + "\n";
 			}
 			Scanner s1 = new Scanner(fileLine);
 			s1.useDelimiter("\\r?\\n?[n]");
 			while(s1.hasNext()) {
 				TestPlan tp = processTestPlan(s1.next());
-				plans.add(tp);
+				if(tp != null) {
+					plans.add(tp);
+				}
 			}
+			s1.close();
 			
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("Unable to load file.");
@@ -63,10 +66,21 @@ public class TestPlanReader {
 		try {
 			Scanner s1 = new Scanner(s);
 			TestPlan tp = new TestPlan(s1.nextLine().trim());
+			s1.useDelimiter("\\r?\\n?[#]");
+			while(s1.hasNext()) {
+				TestCase tc = processTest(tp, s1.next());
+				if(tc != null) {
+					tp.addTestCase(tc);
+				}
+				
+			}
+			
+			s1.close();
+			return tp;
 		} catch(Exception e) {
 			
+			return null;
 		}
-		return null;
 	}
 
 	/**
@@ -76,6 +90,24 @@ public class TestPlanReader {
 	 * @return a Test Case Object
 	 */
 	private static TestCase processTest(AbstractTestPlan testPlan, String s) {
-		return null;
+		
+		try {
+			Scanner s1 = new Scanner(s);
+			Scanner s2 = new Scanner(s1.nextLine().trim());
+			s2.useDelimiter(",");
+			String id = s2.next();
+			String type = s2.next();
+			s2.close();
+			s1.useDelimiter("\\r?\\n?[-]");
+			Scanner infoScanner = new Scanner(s1.next());
+			infoScanner.useDelimiter("\\r?\\n?[*]");
+			String description = infoScanner.next();
+			String expected = infoScanner.next();
+			TestCase tc = new TestCase(id, type, description, expected);
+			tc.setTestPlan(testPlan);
+			return tc;
+		} catch(Exception e) {
+			return null;
+		}
 	}
 }
