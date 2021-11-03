@@ -24,21 +24,34 @@ public class TestPlanReader {
 	 * @throws IllegalArgumentException if the file cannot be loaded or does not exist.
 	 */
 	public static ISortedList<TestPlan> readTestPlansFile(File file) {
-		
+		ISortedList<TestPlan> plans = new SortedList<TestPlan>();
 		
 		try {
-			Scanner fileReader = new Scanner(new FileInputStream(file.getPath()));
-			ISortedList<TestPlan> plans = new SortedList<TestPlan>();
+			Scanner fileReader = new Scanner(new FileInputStream(file));
 			String fileLine = "";
-			while(fileReader.hasNextLine()) {
-				
+			if(!fileReader.hasNextLine()) {
+				throw new IllegalArgumentException("Unable to load file.");
 			}
+			fileLine = fileLine + fileReader.nextLine();
+			if(!fileLine.substring(0, 1).equals("!")) {
+				throw new IllegalArgumentException("Unable to load file.");
+			}
+			while(fileReader.hasNextLine()) {
+				fileLine = fileLine + fileReader.nextLine();
+			}
+			Scanner s1 = new Scanner(fileLine);
+			s1.useDelimiter("\\r?\\n?[n]");
+			while(s1.hasNext()) {
+				TestPlan tp = processTestPlan(s1.next());
+				plans.add(tp);
+			}
+			
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("Unable to load file.");
 		}
 		
 		
-		return null;
+		return plans;
 	}
 
 	/**
@@ -46,7 +59,13 @@ public class TestPlanReader {
 	 * @param s a String version of a Test Plan
 	 * @return a Test Plan Object
 	 */
-	private TestPlan processTestPlan(String s) {
+	private static TestPlan processTestPlan(String s) {
+		try {
+			Scanner s1 = new Scanner(s);
+			TestPlan tp = new TestPlan(s1.nextLine().trim());
+		} catch(Exception e) {
+			
+		}
 		return null;
 	}
 
@@ -56,7 +75,7 @@ public class TestPlanReader {
 	 * @param s String to process
 	 * @return a Test Case Object
 	 */
-	private TestCase processTest(AbstractTestPlan testPlan, String s) {
+	private static TestCase processTest(AbstractTestPlan testPlan, String s) {
 		return null;
 	}
 }
