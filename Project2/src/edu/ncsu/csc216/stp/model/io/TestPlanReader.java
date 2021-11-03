@@ -3,6 +3,7 @@ package edu.ncsu.csc216.stp.model.io;
 import edu.ncsu.csc216.stp.model.test_plans.AbstractTestPlan;
 import edu.ncsu.csc216.stp.model.test_plans.TestPlan;
 import edu.ncsu.csc216.stp.model.tests.TestCase;
+import edu.ncsu.csc216.stp.model.tests.TestResult;
 import edu.ncsu.csc216.stp.model.util.ISortedList;
 import edu.ncsu.csc216.stp.model.util.SortedList;
 
@@ -40,11 +41,13 @@ public class TestPlanReader {
 				fileLine = fileLine + fileReader.nextLine() + "\n";
 			}
 			Scanner s1 = new Scanner(fileLine);
-			s1.useDelimiter("\\r?\\n?[n]");
+			s1.useDelimiter("\\r?\\n?[!]");
+			TestPlan tp = null;
 			while(s1.hasNext()) {
-				TestPlan tp = processTestPlan(s1.next());
+				tp = processTestPlan(s1.next());
 				if(tp != null) {
 					plans.add(tp);
+					tp = null;
 				}
 			}
 			s1.close();
@@ -89,7 +92,7 @@ public class TestPlanReader {
 	 * @param s String to process
 	 * @return a Test Case Object
 	 */
-	private static TestCase processTest(AbstractTestPlan testPlan, String s) {
+	private static TestCase processTest(TestPlan testPlan, String s) {
 		
 		try {
 			Scanner s1 = new Scanner(s);
@@ -101,10 +104,21 @@ public class TestPlanReader {
 			s1.useDelimiter("\\r?\\n?[-]");
 			Scanner infoScanner = new Scanner(s1.next());
 			infoScanner.useDelimiter("\\r?\\n?[*]");
-			String description = infoScanner.next();
-			String expected = infoScanner.next();
+			String description = infoScanner.next().trim();
+			String expected = infoScanner.next().trim();
 			TestCase tc = new TestCase(id, type, description, expected);
 			tc.setTestPlan(testPlan);
+			while(s1.hasNext()) {
+				String resultString = s1.next().trim();
+				String passingString = resultString.substring(0,resultString.indexOf(":"));
+				String actualResultString = resultString.substring(resultString.indexOf(":")+1).trim();
+				if(passingString.equals(TestResult.PASS)) {
+					tc.addTestResult(true, actualResultString);
+				}
+				else if(passingString.equals(TestResult.FAIL)) {
+					tc.addTestResult(false, actualResultString);
+				}
+			}
 			return tc;
 		} catch(Exception e) {
 			return null;

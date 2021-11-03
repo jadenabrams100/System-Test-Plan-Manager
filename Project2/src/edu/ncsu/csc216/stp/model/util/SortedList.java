@@ -38,7 +38,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 			size++;
 		}
 		else {
-			if(this.contains(element)) {
+			if(contains(element)) {
 				throw new IllegalArgumentException("Cannot add duplicate element");
 			}
 			// reset list copy

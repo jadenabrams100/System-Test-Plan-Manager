@@ -25,7 +25,6 @@ class TestTestPlanReader {
 	 */
 	@Test
 	void testReadTestPlansFile() {
-		fail("Not yet implemented");
 		
 		//test file 0
 		ISortedList<TestPlan> list1 = TestPlanReader.readTestPlansFile(new File("test-files/test-plans0.txt"));
