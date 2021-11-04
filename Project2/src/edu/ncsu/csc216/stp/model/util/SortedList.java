@@ -30,7 +30,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	public void add(E element) {
 		// check if element is null
 		if(element == null) {
-			throw new NullPointerException("Cannot add null element");
+			throw new NullPointerException("Cannot add null element.");
 		}
 		// add if list is empty
 		if(front == null) {
