@@ -17,7 +17,7 @@ public class ListNode<E> {
 	 * @param next the next node to link to
 	 */
 	public ListNode(E data, ListNode<E> next) {
-		this.data = (E) data;
+		this.data = data;
 		this.next = next;
 	}
 }

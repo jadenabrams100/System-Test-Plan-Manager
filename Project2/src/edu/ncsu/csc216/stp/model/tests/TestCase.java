@@ -33,7 +33,7 @@ public class TestCase {
 		setTestType(testType);
 		setTestDescription(testDescription);
 		setExpectedResults(expectedResults);
-		results = new Log<TestResult>();
+		results = new Log<>();
 		plan = null;
 	}
 
@@ -108,7 +108,7 @@ public class TestCase {
 		if(results.size() == 0) {
 			return false;
 		}
-		return results.get(results.size()-1).isPassing();
+		return results.get(results.size() - 1).isPassing();
 	}
 
 	/**
@@ -126,6 +126,7 @@ public class TestCase {
 	 * Returns a string representation of the testResults Log.
 	 * @return a String version of the Test Result log, with a leading '-' appended to the start of each Test Result.
 	 */
+	@SuppressWarnings("StringConcatenationInLoop")
 	public String getActualResultsLog() {
 		String rtn = "";
 		for(int i = 0; i < results.size(); i++) {

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.stp.model.tests;
 
 import static org.junit.jupiter.api.Assertions.*;

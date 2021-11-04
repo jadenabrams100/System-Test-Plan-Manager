@@ -45,7 +45,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 			ListNode<E> current = front;
 			//check if element should be first element in list
 			if(element.compareTo(current.data) < 0) {
-				front = new ListNode<E>(element,front);
+				front = new ListNode<E>(element, front);
 				size++;
 			}
 			else {
@@ -79,7 +79,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	@Override
 	public E remove(int idx) {
 		checkIndex(idx);
-		E removed = null;
+		E removed;
 		if (idx == 0) {
 			removed = (E) front.data;
 			front = front.next;
@@ -119,9 +119,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 						check = check.next;
 					}
 					if(check.next == null) {
-						if(check.data.equals(element)) {
-							return true;
-						}
+						return check.data.equals(element);
 					}
 		return false;
 	}
@@ -142,7 +140,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 		for (int i = 0; i < idx - 1; i++) {
 			current = current.next;
 		}
-		return (E) current.next.data;
+		return current.next.data;
 	}
 
 	/**
@@ -160,7 +158,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	 * @throws IndexOutOfBoundsException if index is invalid
 	 */
 	private void checkIndex(int idx) {
-		if(idx < 0 || idx > size-1) {
+		if(idx < 0 || idx > size - 1) {
 			throw new IndexOutOfBoundsException("Invalid index.");
 		}
 	}

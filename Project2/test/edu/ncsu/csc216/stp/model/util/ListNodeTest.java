@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.stp.model.util;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +16,7 @@ class ListNodeTest {
 	 */
 	@Test
 	void testListNode() {
-		ListNode<String> n = new ListNode<String>("String",null);
+		ListNode<String> n = new ListNode<>("String",null);
 		assertEquals("String", n.data);
 		assertNull(n.next);
 		

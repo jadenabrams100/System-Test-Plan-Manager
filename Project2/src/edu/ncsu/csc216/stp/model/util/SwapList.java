@@ -44,9 +44,7 @@ public class SwapList<E> implements ISwapList<E> {
 	public E remove(int idx) {
 		checkIndex(idx);
 		E rtn = list[idx];
-		for (int i = idx; i < size; i++) {
-			list[i] = list[i + 1];
-		}
+		if (size - idx >= 0) System.arraycopy(list, idx + 1, list, idx, size - idx);
 		list[size - 1] = null;
 		size--;
 		return rtn;
@@ -62,9 +60,9 @@ public class SwapList<E> implements ISwapList<E> {
 		checkIndex(idx);
 		if(idx != 0) {
 			//do everything
-			E temp = (E) list[idx];
-			list[idx] = list[idx-1];
-			list[idx-1] = temp;
+			E temp = list[idx];
+			list[idx] = list[idx - 1];
+			list[idx - 1] = temp;
 		}
 	}
 
@@ -75,10 +73,10 @@ public class SwapList<E> implements ISwapList<E> {
 	@Override
 	public void moveDown(int idx) {
 		checkIndex(idx);
-		if(idx != size-1) {
-			E temp = (E) list[idx];
-			list[idx] = list[idx+1];
-			list[idx+1] = temp;
+		if(idx != size - 1) {
+			E temp = list[idx];
+			list[idx] = list[idx + 1];
+			list[idx + 1] = temp;
 		}
 	}
 
@@ -90,11 +88,9 @@ public class SwapList<E> implements ISwapList<E> {
 	public void moveToFront(int idx) {
 		checkIndex(idx);
 		if(idx != 0) {
-			E temp = (E) list[idx];
-			list[idx] = list[idx-1];
-			for(int i = 0; i < idx-1; i++) {
-				list[i+1] = list[i];
-			}
+			E temp = list[idx];
+			list[idx] = list[idx - 1];
+			System.arraycopy(list, 0, list, 1, idx - 1);
 			list[0] = temp;
 		}
 	}
@@ -106,13 +102,11 @@ public class SwapList<E> implements ISwapList<E> {
 	@Override
 	public void moveToBack(int idx) {
 		checkIndex(idx);
-		if(idx != size-1) {
-			E temp = (E) list[idx];
-			list[idx] = list[idx+1];
-			for(int i = size-1; i > idx+1; i--) {
-				list[i-1] = list[i];
-			}
-			list[size-1] = temp;
+		if(idx != size - 1) {
+			E temp = list[idx];
+			list[idx] = list[idx + 1];
+			if (size - 1 - (idx + 1) >= 0) System.arraycopy(list, idx + 2, list, idx + 1, size - 1 - (idx + 1));
+			list[size - 1] = temp;
 		}
 		// TODO Auto-generated method stub
 	}
@@ -140,12 +134,12 @@ public class SwapList<E> implements ISwapList<E> {
 	
 	/**
 	 * checks whether the array is at capacity and grows the array if need be
-	 * @param idx the capacity
+	 * @param i the array capacity
 	 */
 	private void checkCapacity(int i) {
 		if(i == list.length) {
 			E[] newList = (E[]) new Object[size * 2];
-			for(int idx = 0; i < size; i++) {
+			for(int idx = 0; i < size; idx++) {
 				newList[idx] = list[idx];
 			}
 			list = newList;
@@ -157,7 +151,7 @@ public class SwapList<E> implements ISwapList<E> {
 	 * @param idx the index to check
 	 */
 	private void checkIndex(int idx) {
-		if(idx < 0 || idx > size-1) {
+		if(idx < 0 || idx > size - 1) {
 			throw new IndexOutOfBoundsException("Invalid index.");
 		}
 	}

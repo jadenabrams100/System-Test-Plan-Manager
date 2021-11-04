@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.stp.model.util;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +17,7 @@ class SwapListTest {
 	 */
 	@Test
 	void testSwapList() {
-		SwapList<String> s = new SwapList<String>();
+		SwapList<String> s = new SwapList<>();
 		assertEquals(0, s.size());
 		
 	}
@@ -30,7 +27,7 @@ class SwapListTest {
 	 */
 	@Test
 	void testAdd() {
-		SwapList<String> s = new SwapList<String>();
+		SwapList<String> s = new SwapList<>();
 		Exception e1 = assertThrows(NullPointerException.class, () -> s.add(null));
 		assertEquals("Cannot add null element.", e1.getMessage());
 		s.add("apple");
@@ -52,7 +49,7 @@ class SwapListTest {
 	 */
 	@Test
 	void testRemove() {
-		SwapList<String> s = new SwapList<String>();
+		SwapList<String> s = new SwapList<>();
 		s.add("apple");
 		s.add("banana");
 		s.add("dog");
@@ -79,7 +76,7 @@ class SwapListTest {
 	 */
 	@Test
 	void testMoveUp() {
-		SwapList<String> s = new SwapList<String>();
+		SwapList<String> s = new SwapList<>();
 		s.add("apple");
 		s.add("banana");
 		s.add("dog");
@@ -101,7 +98,7 @@ class SwapListTest {
 	 */
 	@Test
 	void testMoveDown() {
-		SwapList<String> s = new SwapList<String>();
+		SwapList<String> s = new SwapList<>();
 		s.add("apple");
 		s.add("banana");
 		s.add("dog");
@@ -123,7 +120,7 @@ class SwapListTest {
 	 */
 	@Test
 	void testMoveToFront() {
-		SwapList<String> s = new SwapList<String>();
+		SwapList<String> s = new SwapList<>();
 		s.add("apple");
 		s.add("banana");
 		s.add("dog");
@@ -148,7 +145,7 @@ class SwapListTest {
 	 */
 	@Test
 	void testMoveToBack() {
-		SwapList<String> s = new SwapList<String>();
+		SwapList<String> s = new SwapList<>();
 		s.add("apple");
 		s.add("banana");
 		s.add("dog");
@@ -173,7 +170,7 @@ class SwapListTest {
 	 */
 	@Test
 	void testGet() {
-		SwapList<String> s = new SwapList<String>();
+		SwapList<String> s = new SwapList<>();
 		s.add("apple");
 		s.add("banana");
 		s.add("dog");
@@ -191,7 +188,7 @@ class SwapListTest {
 	 */
 	@Test
 	void testSize() {
-		SwapList<String> s = new SwapList<String>();
+		SwapList<String> s = new SwapList<>();
 		s.add("apple");
 		s.add("banana");
 		s.add("dog");

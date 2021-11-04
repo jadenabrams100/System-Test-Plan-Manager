@@ -3,6 +3,7 @@ package edu.ncsu.csc216.stp.model.io;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,16 +23,17 @@ class TestTestPlanReader {
 	 */
 	@Test
 	void testReadTestPlansFile() {
+		AtomicReference<ISortedList<TestPlan>> listTest = new AtomicReference<>();
 
 		// test empty file
 		Exception e = assertThrows(IllegalArgumentException.class, () -> {
-			ISortedList<TestPlan> listTest = TestPlanReader.readTestPlansFile(new File("test-files/test-empty.txt"));
+			listTest.set(TestPlanReader.readTestPlansFile(new File("test-files/test-empty.txt")));
 		});
 		assertEquals("Unable to load file.", e.getMessage());
 
 		// test nonexistent file
 		e = assertThrows(IllegalArgumentException.class, () -> {
-			ISortedList<TestPlan> listTest = TestPlanReader.readTestPlansFile(new File("test-files/this-file-does-not.exist"));
+			listTest.set(TestPlanReader.readTestPlansFile(new File("test-files/this-file-does-not.exist")));
 		});
 		assertEquals("Unable to load file.", e.getMessage());
 		

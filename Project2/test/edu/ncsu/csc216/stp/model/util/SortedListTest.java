@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.stp.model.util;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +17,7 @@ class SortedListTest {
 	 */
 	@Test
 	void testSortedList() {
-		SortedList<String> s = new SortedList<String>();
+		SortedList<String> s = new SortedList<>();
 		assertEquals(0, s.size());
 	}
 
@@ -29,7 +26,7 @@ class SortedListTest {
 	 */
 	@Test
 	void testAdd() {
-		SortedList<String> s = new SortedList<String>();
+		SortedList<String> s = new SortedList<>();
 		Exception e1 = assertThrows(NullPointerException.class, () -> s.add(null));
 		assertEquals("Cannot add null element", e1.getMessage());
 		s.add("apple");
@@ -52,7 +49,7 @@ class SortedListTest {
 	 */
 	@Test
 	void testRemove() {
-		SortedList<String> s = new SortedList<String>();
+		SortedList<String> s = new SortedList<>();
 		s.add("apple");
 		s.add("banana");
 		s.add("dog");
@@ -80,7 +77,7 @@ class SortedListTest {
 	 */
 	@Test
 	void testContains() {
-		SortedList<String> s = new SortedList<String>();
+		SortedList<String> s = new SortedList<>();
 		assertFalse(s.contains(null));
 		s.add("cat");
 		assertTrue(s.contains("cat"));
@@ -98,7 +95,7 @@ class SortedListTest {
 	 */
 	@Test
 	void testGet() {
-		SortedList<String> s = new SortedList<String>();
+		SortedList<String> s = new SortedList<>();
 		s.add("apple");
 		s.add("banana");
 		s.add("dog");
@@ -118,7 +115,7 @@ class SortedListTest {
 	 */
 	@Test
 	void testSize() {
-		SortedList<String> s = new SortedList<String>();
+		SortedList<String> s = new SortedList<>();
 		s.add("apple");
 		s.add("banana");
 		s.add("dog");

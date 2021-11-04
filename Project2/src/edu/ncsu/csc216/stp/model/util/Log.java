@@ -6,6 +6,7 @@ package edu.ncsu.csc216.stp.model.util;
  * @author Henry Kon
  * @param <E> Generic Object Type
  */
+@SuppressWarnings("unchecked")
 public class Log<E> implements ILog<E> {
 	
 	/** the list holding the log entries */
@@ -37,9 +38,7 @@ public class Log<E> implements ILog<E> {
 			size++;
 		} catch(IndexOutOfBoundsException e) {
 			E[] newLog = (E[]) new Object[size * 2];
-			for(int i = 0; i < size; i++) {
-				newLog[i] = log[i];
-			}
+			if (size >= 0) System.arraycopy(log, 0, newLog, 0, size);
 			log = newLog;
 			log[size] = element;
 			size++;
@@ -54,7 +53,7 @@ public class Log<E> implements ILog<E> {
 	 */
 	@Override
 	public E get(int idx) {
-		if(idx < 0 || idx > size-1) {
+		if(idx < 0 || idx > size - 1) {
 			throw new IndexOutOfBoundsException("Invalid index.");
 		}
 		return log[idx];
