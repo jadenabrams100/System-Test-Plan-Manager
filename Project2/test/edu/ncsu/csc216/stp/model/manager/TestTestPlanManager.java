@@ -53,7 +53,7 @@ class TestTestPlanManager {
 	/**
 	 * Test method for saveTestPlans()
 	 */
-	@SuppressWarnings("RedundantExplicitClose")
+	//@SuppressWarnings("RedundantExplicitClose")
 	@Test
 	void testSaveTestPlans() {
 		TestPlanManager t = new TestPlanManager();

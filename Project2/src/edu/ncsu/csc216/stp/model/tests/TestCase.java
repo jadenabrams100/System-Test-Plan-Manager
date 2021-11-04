@@ -126,7 +126,7 @@ public class TestCase {
 	 * Returns a string representation of the testResults Log.
 	 * @return a String version of the Test Result log, with a leading '-' appended to the start of each Test Result.
 	 */
-	@SuppressWarnings("StringConcatenationInLoop")
+	//@SuppressWarnings("StringConcatenationInLoop")
 	public String getActualResultsLog() {
 		String rtn = "";
 		for(int i = 0; i < results.size(); i++) {

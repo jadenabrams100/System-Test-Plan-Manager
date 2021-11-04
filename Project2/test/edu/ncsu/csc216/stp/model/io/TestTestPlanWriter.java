@@ -39,7 +39,7 @@ class TestTestPlanWriter {
 			fail();
 		}
 
-		@SuppressWarnings("CodeBlock2Expr")
+		//@SuppressWarnings("CodeBlock2Expr")
 		Exception e = assertThrows(IllegalArgumentException.class, () -> {
 			TestPlanWriter.writeTestPlanFile(new File("/this/path/does/not/exi.st"), list);
 		});

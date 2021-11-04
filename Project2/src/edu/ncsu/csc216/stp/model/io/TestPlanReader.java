@@ -15,7 +15,7 @@ import edu.ncsu.csc216.stp.model.util.SortedList;
  * Class that handles reading Test Plans from a file
  * @author Henry Kon
  */
-@SuppressWarnings("StringConcatenationInLoop")
+//@SuppressWarnings("StringConcatenationInLoop")
 public class TestPlanReader {
 	/**
 	 * Reads Test Plans from a file
@@ -24,7 +24,7 @@ public class TestPlanReader {
 	 * @return a List of Test Plans
 	 * @throws IllegalArgumentException if the file cannot be loaded or does not exist.
 	 */
-	@SuppressWarnings("UnusedAssignment")
+	//@SuppressWarnings("UnusedAssignment")
 	public static ISortedList<TestPlan> readTestPlansFile(File file) {
 		ISortedList<TestPlan> plans = new SortedList<>();
 		
@@ -114,6 +114,7 @@ public class TestPlanReader {
 					tc.addTestResult(false, actualResultString);
 				}
 			}
+			s1.close();
 			return tc;
 		} catch(Exception e) {
 			return null;
