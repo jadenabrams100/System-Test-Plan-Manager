@@ -77,6 +77,11 @@ public class TestPlanManager {
 	public void addTestPlan(String testPlanName) {
 		if("Failing Tests".equalsIgnoreCase(testPlanName))
 			throw new IllegalArgumentException("Invalid name.");
+		for(int i = 0; i < testPlans.size(); i++) {
+			if(testPlans.get(i).getTestPlanName().equalsIgnoreCase(testPlanName)) {
+				throw new IllegalArgumentException("Invalid name.");
+			}	
+		}
 		testPlans.add(new TestPlan(testPlanName));
 		for (int i = 0; i < testPlans.size(); i++) {
 			if(testPlans.get(i).getTestPlanName().equals(testPlanName)) {
