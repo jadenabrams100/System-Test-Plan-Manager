@@ -39,6 +39,8 @@ public class TestPlanManager {
 	 */
 	public void loadTestPlans(File testPlanFile) {
 		ISortedList<TestPlan> newPlans = TestPlanReader.readTestPlansFile(testPlanFile);
+		if(testPlans.size() != 0)
+			isChanged = true;
 		for (int i = 0; i < newPlans.size(); i++) {
 			try {
 				testPlans.add(newPlans.get(i));
@@ -161,7 +163,7 @@ public class TestPlanManager {
 	 */
 	public void removeTestPlan() {
 		if(currentTestPlan == failingTestList)
-			throw new IllegalArgumentException("The Failing Tests list may not be deleted");
+			throw new IllegalArgumentException("The Failing Tests list may not be deleted.");
 		int idx = -1;
 		for (int i = 0; i < testPlans.size(); i++) {
 			if(testPlans.get(i).getTestPlanName().equals(currentTestPlan.getTestPlanName()))
