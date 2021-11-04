@@ -46,7 +46,6 @@ import edu.ncsu.csc216.stp.model.tests.TestResult;
  * 
  * @author Dr. Sarah Heckman
  */
-@SuppressWarnings("ALL")
 public class SystemTestPlanGUI extends JFrame implements ActionListener {
 	
 	/** ID number used for object serialization. */

@@ -10,7 +10,7 @@ package edu.ncsu.csc216.stp.model.util;
 public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 	
 	/** the first node in the list */
-	private ListNode front;
+	private ListNode<E> front;
 	/** the size of the list */
 	private int size;
 
@@ -85,7 +85,7 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 			front = front.next;
 		}
 		else {
-			ListNode current = front;
+			ListNode<E> current = front;
 			for (int i = 0; i < idx - 1; i++) {
 				current = current.next;
 			}
