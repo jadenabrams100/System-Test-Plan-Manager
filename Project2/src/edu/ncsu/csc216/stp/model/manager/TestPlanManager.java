@@ -76,7 +76,13 @@ public class TestPlanManager {
 		if("Failing Tests".equalsIgnoreCase(testPlanName))
 			throw new IllegalArgumentException("Invalid name.");
 		testPlans.add(new TestPlan(testPlanName));
-		isChanged = true;
+		for (int i = 0; i < testPlans.size(); i++) {
+			if(testPlans.get(i).getTestPlanName().equals(testPlanName)) {
+				currentTestPlan = testPlans.get(i);
+				isChanged = true;
+				return;
+			}
+		}
 	}
 
 	/**

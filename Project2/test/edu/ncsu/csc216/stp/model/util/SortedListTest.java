@@ -32,7 +32,7 @@ class SortedListTest {
 		s.add("apple");
 		assertEquals(1, s.size());
 		Exception e2 = assertThrows(IllegalArgumentException.class, () -> s.add("apple"));
-		assertEquals("Cannot add duplicate element", e2.getMessage());
+		assertEquals("Cannot add duplicate element.", e2.getMessage());
 		s.add("cat");
 		assertEquals(2, s.size());
 		assertEquals("apple", s.get(0));

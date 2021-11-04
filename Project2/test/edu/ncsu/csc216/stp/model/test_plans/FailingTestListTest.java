@@ -25,8 +25,8 @@ class FailingTestListTest {
 		Exception e2 = assertThrows(IllegalArgumentException.class, () -> {
 			t.setTestPlanName("Failling Tests");
 		});
-		assertEquals("Invalid name.", e1.getMessage());
-		assertEquals("Invalid name.", e2.getMessage());
+		assertEquals("The Failing Tests list cannot be edited.", e1.getMessage());
+		assertEquals("The Failing Tests list cannot be edited.", e2.getMessage());
 		assertEquals("Failing Tests", t.getTestPlanName());
 	}
 
