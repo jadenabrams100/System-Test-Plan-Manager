@@ -17,6 +17,7 @@ public class SwapList<E> implements ISwapList<E> {
 	/**
 	 * creates a new swaplist with the internal list initialized with room for 10 elements
 	 */
+	@SuppressWarnings("unchecked")
 	public SwapList() {
 		list = (E[]) new Object[INITIAL_CAPACITY];
 		size = 0;
@@ -136,6 +137,7 @@ public class SwapList<E> implements ISwapList<E> {
 	 * checks whether the array is at capacity and grows the array if need be
 	 * @param i the array capacity
 	 */
+	@SuppressWarnings("unchecked")
 	private void checkCapacity(int i) {
 		if(i == list.length) {
 			E[] newList = (E[]) new Object[size * 2];

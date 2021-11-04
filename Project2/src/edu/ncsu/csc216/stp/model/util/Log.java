@@ -18,6 +18,7 @@ public class Log<E> implements ILog<E> {
 	/**
 	 * Creates a new Log object
 	 */
+	@SuppressWarnings("unchecked")
 	public Log() {
 		log = (E []) new Object[INIT_SIZE];
 		size = 0;
@@ -27,6 +28,7 @@ public class Log<E> implements ILog<E> {
 	 * @param element the element to add
 	 * @throws IllegalArgumentException if element is null
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void add(E element) {
 		if(element == null) {
