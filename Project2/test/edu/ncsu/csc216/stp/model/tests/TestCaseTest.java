@@ -13,17 +13,17 @@ import edu.ncsu.csc216.stp.model.test_plans.TestPlan;
  *
  */
 class TestCaseTest {
-	
-	private final String ID = "TestTimeUpperBound";
-	
-	private final String TYPE = "Boundary Analysis";
-	
-	private final String DESCRIPTION = "Set the time to 4:60";
-	
-	private final String RESULTS = "Invalid Time Entered";
+	/** Stores default ID */
+	private static final String ID = "TestTimeUpperBound";
+	/** Stores default type */
+	private static final String TYPE = "Boundary Analysis";
+	/** Stores default description */
+	private static final String DESCRIPTION = "Set the time to 4:60";
+	/** Stores default results */
+	private static final String RESULTS = "Invalid Time Entered";
 
 	/**
-	 * Test method for TestCases contstructor
+	 * Test method for TestCases constructor
 	 */
 	@Test
 	void testTestCase() {

@@ -101,7 +101,7 @@ class SortedListTest {
 		s.add("dog");
 		s.add("salamander");
 		s.add("wolf");
-		Exception e1 =assertThrows(IndexOutOfBoundsException.class, () -> s.get(-1));
+		Exception e1 = assertThrows(IndexOutOfBoundsException.class, () -> s.get(-1));
 		assertEquals("Invalid index.", e1.getMessage());
 		Exception e2 = assertThrows(IndexOutOfBoundsException.class, () -> s.get(5));
 		assertEquals("Invalid index.", e2.getMessage());

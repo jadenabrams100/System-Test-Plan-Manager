@@ -16,7 +16,7 @@ class ListNodeTest {
 	 */
 	@Test
 	void testListNode() {
-		ListNode<String> n = new ListNode<>("String",null);
+		ListNode<String> n = new ListNode<>("String", null);
 		assertEquals("String", n.data);
 		assertNull(n.next);
 		
