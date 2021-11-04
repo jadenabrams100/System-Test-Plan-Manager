@@ -44,6 +44,7 @@ public class TestPlanManager {
 		for (int i = 0; i < newPlans.size(); i++) {
 			try {
 				testPlans.add(newPlans.get(i));
+				isChanged = true;
 			} catch(IllegalArgumentException ignored) {
 				// catch block ignored.
 			}
