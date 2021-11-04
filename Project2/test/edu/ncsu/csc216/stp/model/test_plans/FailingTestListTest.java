@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Henry Kon
  *
  */
-class TestFailingTestList {
+class FailingTestListTest {
 
 	/**
 	 * Test method for setTestPlanName()

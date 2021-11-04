@@ -16,7 +16,7 @@ import edu.ncsu.csc216.stp.model.tests.TestCase;
  * @author Henry Kon
  *
  */
-class TestTestPlanManager {
+class TestPlanManagerTest {
 
 	/**
 	 * Test method for TestPlanManager constructor

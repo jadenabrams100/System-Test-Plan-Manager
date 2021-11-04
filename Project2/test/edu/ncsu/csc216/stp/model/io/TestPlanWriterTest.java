@@ -17,7 +17,7 @@ import edu.ncsu.csc216.stp.model.util.ISortedList;
  * @author Henry Kon
  *
  */
-class TestTestPlanWriter {
+class TestPlanWriterTest {
 
 	/**
 	 * Test method for writeTestPlansFile()

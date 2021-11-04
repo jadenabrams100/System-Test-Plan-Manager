@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * @author Jaden Abrams
  * @author Henry Kon
  */
-class TestTestPlan {
+class TestPlanTest {
 
 	/**
 	 * Test method for addTestCase()

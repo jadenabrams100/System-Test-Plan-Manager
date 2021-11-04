@@ -16,7 +16,7 @@ import edu.ncsu.csc216.stp.model.util.ISortedList;
  * @author Henry Kon
  *
  */
-class TestTestPlanReader {
+class TestPlanReaderTest {
 
 	/**
 	 * Test method for readTestPlansFile()
