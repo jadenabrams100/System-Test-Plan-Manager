@@ -1,10 +1,10 @@
 package edu.ncsu.csc216.stp.model.io;
 
-import edu.ncsu.csc216.stp.model.test_plans.TestPlan;
-import java.io.*;
-import edu.ncsu.csc216.stp.model.util.ISortedList;
-
 import java.io.File;
+import java.io.PrintStream;
+
+import edu.ncsu.csc216.stp.model.test_plans.TestPlan;
+import edu.ncsu.csc216.stp.model.util.ISortedList;
 
 /**
  * Class that writes Test Plan data to a file
@@ -20,7 +20,7 @@ public class TestPlanWriter {
 	public static void writeTestPlanFile(File file, ISortedList<TestPlan> testPlanList) {
 		try {
 			PrintStream fileWriter = new PrintStream(file);
-			TestPlan tp = null;
+			TestPlan tp;
 			for(int i = 0; i < testPlanList.size(); i++) {
 				tp = testPlanList.get(i);
 				fileWriter.println("! " + tp.getTestPlanName());
@@ -31,7 +31,7 @@ public class TestPlanWriter {
 			}
 			fileWriter.close();
 		} catch (Exception e) {
-			throw new IllegalArgumentException("Unable to save file");
+			throw new IllegalArgumentException("Unable to save file.");
 		}
 	}
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.stp.model.io;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,6 +38,12 @@ class TestTestPlanWriter {
 		} catch(Exception e){
 			fail();
 		}
+
+		@SuppressWarnings("CodeBlock2Expr")
+		Exception e = assertThrows(IllegalArgumentException.class, () -> {
+			TestPlanWriter.writeTestPlanFile(new File("/this/path/does/not/exi.st"), list);
+		});
+		assertEquals("Unable to save file.", e.getMessage());
 	}
 
 }

@@ -1,21 +1,21 @@
 package edu.ncsu.csc216.stp.model.io;
 
-import edu.ncsu.csc216.stp.model.test_plans.AbstractTestPlan;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import edu.ncsu.csc216.stp.model.test_plans.TestPlan;
 import edu.ncsu.csc216.stp.model.tests.TestCase;
 import edu.ncsu.csc216.stp.model.tests.TestResult;
 import edu.ncsu.csc216.stp.model.util.ISortedList;
 import edu.ncsu.csc216.stp.model.util.SortedList;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 /**
  * Class that handles reading Test Plans from a file
  * @author Henry Kon
  */
+@SuppressWarnings("StringConcatenationInLoop")
 public class TestPlanReader {
 	/**
 	 * Reads Test Plans from a file
@@ -24,8 +24,9 @@ public class TestPlanReader {
 	 * @return a List of Test Plans
 	 * @throws IllegalArgumentException if the file cannot be loaded or does not exist.
 	 */
+	@SuppressWarnings("UnusedAssignment")
 	public static ISortedList<TestPlan> readTestPlansFile(File file) {
-		ISortedList<TestPlan> plans = new SortedList<TestPlan>();
+		ISortedList<TestPlan> plans = new SortedList<>();
 		
 		try {
 			Scanner fileReader = new Scanner(new FileInputStream(file));
@@ -34,7 +35,7 @@ public class TestPlanReader {
 				throw new IllegalArgumentException("Unable to load file.");
 			}
 			fileLine = fileLine + fileReader.nextLine() + "\n";
-			if(!fileLine.substring(0, 1).equals("!")) {
+			if(fileLine.charAt(0) != '!') {
 				throw new IllegalArgumentException("Unable to load file.");
 			}
 			while(fileReader.hasNextLine()) {
@@ -42,7 +43,7 @@ public class TestPlanReader {
 			}
 			Scanner s1 = new Scanner(fileLine);
 			s1.useDelimiter("\\r?\\n?[!]");
-			TestPlan tp = null;
+			TestPlan tp;
 			while(s1.hasNext()) {
 				tp = processTestPlan(s1.next());
 				if(tp != null) {
@@ -51,12 +52,9 @@ public class TestPlanReader {
 				}
 			}
 			s1.close();
-			
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("Unable to load file.");
 		}
-		
-		
 		return plans;
 	}
 
@@ -75,13 +73,10 @@ public class TestPlanReader {
 				if(tc != null) {
 					tp.addTestCase(tc);
 				}
-				
 			}
-			
 			s1.close();
 			return tp;
 		} catch(Exception e) {
-			
 			return null;
 		}
 	}
@@ -110,8 +105,8 @@ public class TestPlanReader {
 			tc.setTestPlan(testPlan);
 			while(s1.hasNext()) {
 				String resultString = s1.next().trim();
-				String passingString = resultString.substring(0,resultString.indexOf(":"));
-				String actualResultString = resultString.substring(resultString.indexOf(":")+1).trim();
+				String passingString = resultString.substring(0, resultString.indexOf(":"));
+				String actualResultString = resultString.substring(resultString.indexOf(":") + 1).trim();
 				if(passingString.equals(TestResult.PASS)) {
 					tc.addTestResult(true, actualResultString);
 				}

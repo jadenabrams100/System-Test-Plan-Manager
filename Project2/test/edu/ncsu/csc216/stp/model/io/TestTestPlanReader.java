@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.stp.model.io;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,6 +22,18 @@ class TestTestPlanReader {
 	 */
 	@Test
 	void testReadTestPlansFile() {
+
+		// test empty file
+		Exception e = assertThrows(IllegalArgumentException.class, () -> {
+			ISortedList<TestPlan> listTest = TestPlanReader.readTestPlansFile(new File("test-files/test-empty.txt"));
+		});
+		assertEquals("Unable to load file.", e.getMessage());
+
+		// test nonexistent file
+		e = assertThrows(IllegalArgumentException.class, () -> {
+			ISortedList<TestPlan> listTest = TestPlanReader.readTestPlansFile(new File("test-files/this-file-does-not.exist"));
+		});
+		assertEquals("Unable to load file.", e.getMessage());
 		
 		//test file 0
 		ISortedList<TestPlan> list1 = TestPlanReader.readTestPlansFile(new File("test-files/test-plans0.txt"));
