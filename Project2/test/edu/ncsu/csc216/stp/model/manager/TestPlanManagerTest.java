@@ -203,7 +203,7 @@ class TestPlanManagerTest {
 		assertEquals(2, t.testPlans.size());
 		t.setCurrentTestPlan("Failing Tests");
 		Exception e = assertThrows(IllegalArgumentException.class, t::removeTestPlan);
-		assertEquals("The Failing Tests list may not be deleted", e.getMessage());
+		assertEquals("The Failing Tests list may not be deleted.", e.getMessage());
 		assertEquals(2, t.testPlans.size());
 		t.setCurrentTestPlan("New Test");
 		t.removeTestPlan();
