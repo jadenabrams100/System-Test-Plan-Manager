@@ -31,7 +31,9 @@ class SwapListTest {
 		Exception e1 = assertThrows(NullPointerException.class, () -> s.add(null));
 		assertEquals("Cannot add null element.", e1.getMessage());
 		s.add("apple");
+		assertEquals("apple", s.get(0));
 		s.add("banana");
+		assertEquals("apple", s.get(0));
 		s.add("dog");
 		s.add("salamander");
 		s.add("wolf");
