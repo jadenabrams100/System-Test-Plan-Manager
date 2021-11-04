@@ -106,6 +106,9 @@ public class SortedList<E extends Comparable<E>> implements ISortedList<E> {
 		if(element == null) {
 			return false;
 		}
+		if(front == null) {
+			return false;
+		}
 		// checks if first element is same as front element
 					ListNode<E> check = front;
 					if(check.data.equals(element)) {
