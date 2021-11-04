@@ -1,12 +1,15 @@
 package edu.ncsu.csc216.stp.model.manager;
 
+import java.io.File;
+
+import edu.ncsu.csc216.stp.model.io.TestPlanReader;
+import edu.ncsu.csc216.stp.model.io.TestPlanWriter;
 import edu.ncsu.csc216.stp.model.test_plans.AbstractTestPlan;
 import edu.ncsu.csc216.stp.model.test_plans.FailingTestList;
 import edu.ncsu.csc216.stp.model.test_plans.TestPlan;
 import edu.ncsu.csc216.stp.model.tests.TestCase;
 import edu.ncsu.csc216.stp.model.util.ISortedList;
-
-import java.io.File;
+import edu.ncsu.csc216.stp.model.util.SortedList;
 
 /**
  * Test Plan Manager Object
@@ -27,7 +30,7 @@ public class TestPlanManager {
 	 * Constructs a new Test Plan Manager
 	 */
 	public TestPlanManager() {
-		// TODO: Auto-generated method stub
+		clearTestPlans();
 	}
 
 	/**
@@ -35,7 +38,7 @@ public class TestPlanManager {
 	 * @param testPlanFile the File to load the Test Plans from
 	 */
 	public void loadTestPlans(File testPlanFile) {
-		// TODO: Auto-generated method stub
+		testPlans = TestPlanReader.readTestPlansFile(testPlanFile);
 	}
 
 	/**
@@ -43,11 +46,12 @@ public class TestPlanManager {
 	 * @param testPlanFile the File to save the Test Plans to
 	 */
 	public void saveTestPlans(File testPlanFile) {
-		// TODO: Auto-generated method stub
+		TestPlanWriter.writeTestPlanFile(testPlanFile, testPlans);
+		isChanged = false;
 	}
 
 	/**
-	 * Gets whether or not the Manager has been modified since the last save
+	 * Gets whether the Manager has been modified since the last save
 	 * @return true if the Manager has been modified, false otherwise.
 	 */
 	public boolean isChanged() {
@@ -60,7 +64,10 @@ public class TestPlanManager {
 	 * @throws IllegalArgumentException if the Test Plan name matches the name of the Failing Tests List.
 	 */
 	public void addTestPlan(String testPlanName) {
-		// TODO: Auto-generated method stub
+		if("Failing Tests".equalsIgnoreCase(testPlanName))
+			throw new IllegalArgumentException("Invalid name.");
+		testPlans.add(new TestPlan(testPlanName));
+		isChanged = true;
 	}
 
 	/**
@@ -68,14 +75,26 @@ public class TestPlanManager {
 	 * @return a String array containing test plan names.
 	 */
 	public String[] getTestPlanNames() {
-		return null;
+		String[] builder = new String[testPlans.size() + 1];
+		builder[0] = failingTestList.getTestPlanName();
+		for (int i = 0; i < testPlans.size(); i++) {
+			builder[i + 1] = testPlans.get(i).getTestPlanName();
+		}
+		return builder;
 	}
 
 	/**
 	 * Helper method to rebuild the Failing Tests List
 	 */
 	private void getFailingTests() {
-		// TODO: Auto-generated method stub
+		failingTestList.clearTests();
+		for (int i = 0; i < testPlans.size(); i++) {
+			TestPlan temp = testPlans.get(i);
+			for (int j = 0; j < temp.getTestCases().size(); j++) {
+				if(!temp.getTestCase(j).isTestCasePassing())
+					failingTestList.addTestCase(temp.getTestCase(j));
+			}
+		}
 	}
 
 	/**
@@ -84,7 +103,12 @@ public class TestPlanManager {
 	 * @param testPlanName the name of the Test Plan to set as the current Test Plan
 	 */
 	public void setCurrentTestPlan(String testPlanName) {
-		// TODO: Auto-generated method stub
+		for (int i = 0; i < testPlans.size(); i++) {
+			if(testPlanName.equalsIgnoreCase(testPlans.get(i).getTestPlanName())) {
+				currentTestPlan = testPlans.get(i);
+				return;
+			}
+		}
 	}
 
 	/**
@@ -92,7 +116,7 @@ public class TestPlanManager {
 	 * @return the Current Test Plan
 	 */
 	public AbstractTestPlan getCurrentTestPlan() {
-		return null;
+		return currentTestPlan;
 	}
 
 	/**
@@ -102,7 +126,14 @@ public class TestPlanManager {
 	 * a pre-existing Test Plan name (all case insensitive).
 	 */
 	public void editTestPlan(String name) {
-		// TODO: Auto-generated method stub
+		if(currentTestPlan == failingTestList)
+			throw new IllegalArgumentException("The Failing Tests list may not be edited.");
+		for (int i = 0; i < testPlans.size(); i++) {
+			if(testPlans.get(i).getTestPlanName().equalsIgnoreCase(name))
+				throw new IllegalArgumentException("Invalid name.");
+		}
+		currentTestPlan.setTestPlanName(name);
+		isChanged = true;
 	}
 
 	/**
@@ -111,7 +142,10 @@ public class TestPlanManager {
 	 * @throws IllegalArgumentException if the Current Test Plan is the Failing Test List.
 	 */
 	public void removeTestPlan() {
-		// TODO: Auto-generated method stub
+		if(currentTestPlan == failingTestList)
+			throw new IllegalArgumentException("The Failing Tests list may not be deleted");
+		currentTestPlan = failingTestList;
+		isChanged = true;
 	}
 
 	/**
@@ -121,7 +155,12 @@ public class TestPlanManager {
 	 * @param testCase the Test Case to add to the Current Test Plan
 	 */
 	public void addTestCase(TestCase testCase) {
-		// TODO: Auto-generated method stub
+		if(currentTestPlan == failingTestList)
+			return;
+		currentTestPlan.addTestCase(testCase);
+		if(!testCase.isTestCasePassing())
+			getFailingTests();
+		isChanged = true;
 	}
 
 	/**
@@ -129,10 +168,13 @@ public class TestPlanManager {
 	 * If the tests are failing, then the Failing Test List should be updated.
 	 * @param idx the index to add the Test Result at
 	 * @param passing a boolean value set to true if the test is passing, false otherwise.
-	 * @param s the test result description
+	 * @param description the test result description
 	 */
-	public void addTestResult(int idx, boolean passing, String s) {
-		// TODO: Auto-generated method stub
+	public void addTestResult(int idx, boolean passing, String description) {
+		currentTestPlan.addTestResult(idx, passing, description);
+		if(!passing)
+			getFailingTests();
+		isChanged = true;
 	}
 
 	/**
@@ -141,6 +183,9 @@ public class TestPlanManager {
 	 * and isChanged to false.
 	 */
 	public void clearTestPlans() {
-		// TODO: Auto-generated method stub
+		testPlans = new SortedList<>();
+		failingTestList = new FailingTestList();
+		currentTestPlan = failingTestList;
+		isChanged = false;
 	}
 }
