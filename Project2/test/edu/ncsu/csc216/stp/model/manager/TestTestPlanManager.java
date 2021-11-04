@@ -1,11 +1,14 @@
-/**
- * 
- */
 package edu.ncsu.csc216.stp.model.manager;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
 import org.junit.jupiter.api.Test;
+
+import edu.ncsu.csc216.stp.model.tests.TestCase;
 
 /**
  * Ensures that TestPlanManager works as expected
@@ -20,7 +23,9 @@ class TestTestPlanManager {
 	 */
 	@Test
 	void testTestPlanManager() {
-		fail("Not yet implemented");
+		TestPlanManager t = new TestPlanManager();
+		t.addTestPlan("New Test Plan");
+		assertEquals("New Test Plan", t.testPlans.get(0).getTestPlanName());
 	}
 
 	/**
@@ -28,15 +33,44 @@ class TestTestPlanManager {
 	 */
 	@Test
 	void testLoadTestPlans() {
-		fail("Not yet implemented");
+		TestPlanManager t = new TestPlanManager();
+		t.loadTestPlans(new File("test-files/test-plans1.txt"));
+		assertEquals(2, t.testPlans.size());
+		assertEquals("PackScheduler", t.testPlans.get(0).getTestPlanName());
+		assertEquals("WolfScheduler", t.testPlans.get(1).getTestPlanName());
+		assertEquals("Failing Tests", t.getCurrentTestPlan().getTestPlanName());
+		assertEquals(3, t.getCurrentTestPlan().getTestCases().size());
+		assertEquals(2, t.testPlans.get(0).getTestCases().size());
+		t.loadTestPlans(new File("test-files/test-plans0.txt"));
+		assertEquals(2, t.testPlans.size());
+		assertEquals("PackScheduler", t.testPlans.get(0).getTestPlanName());
+		assertEquals("WolfScheduler", t.testPlans.get(1).getTestPlanName());
+		assertEquals("Failing Tests", t.getCurrentTestPlan().getTestPlanName());
+		assertEquals(3, t.getCurrentTestPlan().getTestCases().size());
+		assertEquals(2, t.testPlans.get(0).getTestCases().size());
 	}
 
 	/**
 	 * Test method for saveTestPlans()
 	 */
+	@SuppressWarnings("RedundantExplicitClose")
 	@Test
 	void testSaveTestPlans() {
-		fail("Not yet implemented");
+		TestPlanManager t = new TestPlanManager();
+		t.loadTestPlans(new File("test-files/test-plans1.txt"));
+		t.saveTestPlans(new File("test-files/manager-test-out.txt"));
+		try (Scanner expScanner = new Scanner(new File("test-files/manager-expected-plans.txt"));
+		     Scanner actScanner = new Scanner(new File("test-files/manager-test-out.txt"))) {
+
+			while (expScanner.hasNextLine()) {
+				assertEquals(expScanner.nextLine(), actScanner.nextLine());
+			}
+
+			expScanner.close();
+			actScanner.close();
+		} catch (IOException e) {
+			fail("Error reading files.");
+		}
 	}
 
 	/**
@@ -44,7 +78,51 @@ class TestTestPlanManager {
 	 */
 	@Test
 	void testIsChanged() {
-		fail("Not yet implemented");
+		TestPlanManager t = new TestPlanManager();
+		t.loadTestPlans(new File("test-files/test-plans1.txt"));
+		assertFalse(t.isChanged());
+		// addTestPlan
+		t.addTestPlan("New Test Plan");
+		assertTrue(t.isChanged());
+
+		// setCurrentTestPlan
+		t = new TestPlanManager();
+		t.loadTestPlans(new File("test-files/test-plans1.txt"));
+		assertFalse(t.isChanged());
+		t.setCurrentTestPlan(t.testPlans.get(1).getTestPlanName());
+		assertTrue(t.isChanged());
+
+		// removeTestPlan
+		t = new TestPlanManager();
+		t.loadTestPlans(new File("test-files/test-plans1.txt"));
+		assertFalse(t.isChanged());
+		t.setCurrentTestPlan(t.testPlans.get(1).getTestPlanName());
+		t.removeTestPlan();
+		assertTrue(t.isChanged());
+
+		// editTestPlan
+		t = new TestPlanManager();
+		t.loadTestPlans(new File("test-files/test-plans1.txt"));
+		assertFalse(t.isChanged());
+		t.setCurrentTestPlan(t.testPlans.get(1).getTestPlanName());
+		t.editTestPlan("New Name");
+		assertTrue(t.isChanged());
+
+		// addTestCase
+		t = new TestPlanManager();
+		t.loadTestPlans(new File("test-files/test-plans1.txt"));
+		assertFalse(t.isChanged());
+		t.setCurrentTestPlan(t.testPlans.get(1).getTestPlanName());
+		t.addTestCase(new TestCase("test", "TEST", "test test", "test test test"));
+		assertTrue(t.isChanged());
+
+		// clearTestPlans
+		t = new TestPlanManager();
+		t.loadTestPlans(new File("test-files/test-plans1.txt"));
+		assertFalse(t.isChanged());
+		t.clearTestPlans();
+		assertFalse(t.isChanged());
+
 	}
 
 	/**
@@ -52,7 +130,12 @@ class TestTestPlanManager {
 	 */
 	@Test
 	void testAddTestPlan() {
-		fail("Not yet implemented");
+		TestPlanManager t = new TestPlanManager();
+		assertEquals(0, t.testPlans.size());
+		t.addTestPlan("New Test");
+		assertEquals(1, t.testPlans.size());
+		Exception e = assertThrows(IllegalArgumentException.class, () -> t.addTestPlan("Failing Tests"));
+		assertEquals("Invalid name.", e.getMessage());
 	}
 
 	/**
@@ -60,7 +143,17 @@ class TestTestPlanManager {
 	 */
 	@Test
 	void testGetTestPlanNames() {
-		fail("Not yet implemented");
+		String[] comparison = new String[3];
+		comparison[0] = "Failing Tests";
+		comparison[1] = "PackScheduler";
+		comparison[2] = "WolfScheduler";
+		TestPlanManager t = new TestPlanManager();
+		t.loadTestPlans(new File("test-files/test-plans1.txt"));
+		String[] actual = t.getTestPlanNames();
+		assertEquals(comparison.length, actual.length);
+		for (int i = 0; i < comparison.length; i++) {
+			assertEquals(comparison[i], actual[i]);
+		}
 	}
 
 	/**
@@ -68,15 +161,13 @@ class TestTestPlanManager {
 	 */
 	@Test
 	void testSetCurrentTestPlan() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for getCurrentTestPlan()
-	 */
-	@Test
-	void testGetCurrentTestPlan() {
-		fail("Not yet implemented");
+		TestPlanManager t = new TestPlanManager();
+		t.loadTestPlans(new File("test-files/test-plans1.txt"));
+		assertEquals("Failing Tests", t.getCurrentTestPlan().getTestPlanName());
+		t.setCurrentTestPlan("This Test Does Not Exist");
+		assertEquals("Failing Tests", t.getCurrentTestPlan().getTestPlanName());
+		t.setCurrentTestPlan("WolfScheduler");
+		assertEquals("WolfScheduler", t.getCurrentTestPlan().getTestPlanName());
 	}
 
 	/**
@@ -84,7 +175,21 @@ class TestTestPlanManager {
 	 */
 	@Test
 	void testEditTestPlan() {
-		fail("Not yet implemented");
+		TestPlanManager t = new TestPlanManager();
+		t.addTestPlan("New Test");
+		t.addTestPlan("New Test 2");
+		assertEquals(2, t.testPlans.size());
+		t.setCurrentTestPlan("New Test 2");
+		Exception e = assertThrows(IllegalArgumentException.class, () -> t.editTestPlan("New Test"));
+		assertEquals("Invalid name.", e.getMessage());
+		assertEquals("New Test 2", t.getCurrentTestPlan().getTestPlanName());
+		e = assertThrows(IllegalArgumentException.class, () -> t.editTestPlan("fAIliNg TeStS"));
+		assertEquals("Invalid name.", e.getMessage());
+		assertEquals("New Test 2", t.getCurrentTestPlan().getTestPlanName());
+		t.setCurrentTestPlan("Failing Tests");
+		e = assertThrows(IllegalArgumentException.class, () -> t.editTestPlan("No Longer Failing Tests!"));
+		assertEquals("The Failing Tests list may not be edited.", e.getMessage());
+		assertEquals("Failing Tests", t.getCurrentTestPlan().getTestPlanName());
 	}
 
 	/**
@@ -92,15 +197,17 @@ class TestTestPlanManager {
 	 */
 	@Test
 	void testRemoveTestPlan() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for addTestCase()
-	 */
-	@Test
-	void testAddTestCase() {
-		fail("Not yet implemented");
+		TestPlanManager t = new TestPlanManager();
+		t.addTestPlan("New Test");
+		t.addTestPlan("New Test 2");
+		assertEquals(2, t.testPlans.size());
+		t.setCurrentTestPlan("Failing Tests");
+		Exception e = assertThrows(IllegalArgumentException.class, t::removeTestPlan);
+		assertEquals("The Failing Tests list may not be deleted", e.getMessage());
+		assertEquals(2, t.testPlans.size());
+		t.setCurrentTestPlan("New Test");
+		t.removeTestPlan();
+		assertEquals(1, t.testPlans.size());
 	}
 
 	/**
@@ -108,7 +215,14 @@ class TestTestPlanManager {
 	 */
 	@Test
 	void testAddTestResult() {
-		fail("Not yet implemented");
+		TestPlanManager t = new TestPlanManager();
+		t.loadTestPlans(new File("test-files/test-plans1.txt"));
+		t.setCurrentTestPlan("WolfScheduler");
+		assertEquals(3, t.getCurrentTestPlan().getTestCase(0).getResults().size());
+		t.addTestResult(0, true, "This test passed!");
+		assertEquals(4, t.getCurrentTestPlan().getTestCase(0).getResults().size());
+		t.addTestResult(0, false, "This test failed! :(");
+		assertEquals(5, t.getCurrentTestPlan().getTestCase(0).getResults().size());
 	}
 
 	/**
@@ -116,7 +230,13 @@ class TestTestPlanManager {
 	 */
 	@Test
 	void testClearTestPlans() {
-		fail("Not yet implemented");
+		TestPlanManager t = new TestPlanManager();
+		t.loadTestPlans(new File("test-files/test-plans1.txt"));
+		t.setCurrentTestPlan("WolfScheduler");
+		assertEquals(2, t.testPlans.size());
+		t.clearTestPlans();
+		assertEquals("Failing Tests", t.getCurrentTestPlan().getTestPlanName());
+		assertEquals(0, t.testPlans.size());
 	}
 
 }

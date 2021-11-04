@@ -38,7 +38,16 @@ public class TestPlanManager {
 	 * @param testPlanFile the File to load the Test Plans from
 	 */
 	public void loadTestPlans(File testPlanFile) {
-		testPlans = TestPlanReader.readTestPlansFile(testPlanFile);
+		ISortedList<TestPlan> newPlans = TestPlanReader.readTestPlansFile(testPlanFile);
+		for (int i = 0; i < newPlans.size(); i++) {
+			try {
+				testPlans.add(newPlans.get(i));
+			} catch(IllegalArgumentException ignored) {
+				// catch block ignored.
+			}
+		}
+		setCurrentTestPlan(failingTestList.getTestPlanName());
+		getFailingTests();
 	}
 
 	/**
@@ -103,9 +112,12 @@ public class TestPlanManager {
 	 * @param testPlanName the name of the Test Plan to set as the current Test Plan
 	 */
 	public void setCurrentTestPlan(String testPlanName) {
+		if(failingTestList.getTestPlanName().equals(testPlanName))
+			currentTestPlan = failingTestList;
 		for (int i = 0; i < testPlans.size(); i++) {
 			if(testPlanName.equalsIgnoreCase(testPlans.get(i).getTestPlanName())) {
 				currentTestPlan = testPlans.get(i);
+				isChanged = true;
 				return;
 			}
 		}
@@ -144,6 +156,14 @@ public class TestPlanManager {
 	public void removeTestPlan() {
 		if(currentTestPlan == failingTestList)
 			throw new IllegalArgumentException("The Failing Tests list may not be deleted");
+		int idx = -1;
+		for (int i = 0; i < testPlans.size(); i++) {
+			if(testPlans.get(i).getTestPlanName().equals(currentTestPlan.getTestPlanName()))
+				idx = i;
+		}
+		if(idx == -1)
+			return;
+		testPlans.remove(idx);
 		currentTestPlan = failingTestList;
 		isChanged = true;
 	}
