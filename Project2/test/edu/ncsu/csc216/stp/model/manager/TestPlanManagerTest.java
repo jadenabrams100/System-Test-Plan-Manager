@@ -80,7 +80,7 @@ class TestPlanManagerTest {
 	void testIsChanged() {
 		TestPlanManager t = new TestPlanManager();
 		t.loadTestPlans(new File("test-files/test-plans1.txt"));
-		assertFalse(t.isChanged());
+		assertTrue(t.isChanged());
 		// addTestPlan
 		t.addTestPlan("New Test Plan");
 		assertTrue(t.isChanged());
@@ -88,14 +88,14 @@ class TestPlanManagerTest {
 		// setCurrentTestPlan
 		t = new TestPlanManager();
 		t.loadTestPlans(new File("test-files/test-plans1.txt"));
-		assertFalse(t.isChanged());
+		assertTrue(t.isChanged());
 		t.setCurrentTestPlan(t.testPlans.get(1).getTestPlanName());
 		assertTrue(t.isChanged());
 
 		// removeTestPlan
 		t = new TestPlanManager();
 		t.loadTestPlans(new File("test-files/test-plans1.txt"));
-		assertFalse(t.isChanged());
+		assertTrue(t.isChanged());
 		t.setCurrentTestPlan(t.testPlans.get(1).getTestPlanName());
 		t.removeTestPlan();
 		assertTrue(t.isChanged());
@@ -103,7 +103,7 @@ class TestPlanManagerTest {
 		// editTestPlan
 		t = new TestPlanManager();
 		t.loadTestPlans(new File("test-files/test-plans1.txt"));
-		assertFalse(t.isChanged());
+		assertTrue(t.isChanged());
 		t.setCurrentTestPlan(t.testPlans.get(1).getTestPlanName());
 		t.editTestPlan("New Name");
 		assertTrue(t.isChanged());
@@ -111,7 +111,7 @@ class TestPlanManagerTest {
 		// addTestCase
 		t = new TestPlanManager();
 		t.loadTestPlans(new File("test-files/test-plans1.txt"));
-		assertFalse(t.isChanged());
+		assertTrue(t.isChanged());
 		t.setCurrentTestPlan(t.testPlans.get(1).getTestPlanName());
 		t.addTestCase(new TestCase("test", "TEST", "test test", "test test test"));
 		assertTrue(t.isChanged());
@@ -119,7 +119,7 @@ class TestPlanManagerTest {
 		// clearTestPlans
 		t = new TestPlanManager();
 		t.loadTestPlans(new File("test-files/test-plans1.txt"));
-		assertFalse(t.isChanged());
+		assertTrue(t.isChanged());
 		t.clearTestPlans();
 		assertFalse(t.isChanged());
 
