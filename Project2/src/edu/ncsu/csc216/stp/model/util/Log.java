@@ -6,7 +6,6 @@ package edu.ncsu.csc216.stp.model.util;
  * @author Henry Kon
  * @param <E> Generic Object Type
  */
-@SuppressWarnings("unchecked")
 public class Log<E> implements ILog<E> {
 	
 	/** the list holding the log entries */
