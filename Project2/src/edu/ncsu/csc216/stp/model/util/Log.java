@@ -20,7 +20,7 @@ public class Log<E> implements ILog<E> {
 	 * Creates a new Log object
 	 */
 	public Log() {
-		log = (E []) new Object[10];
+		log = (E []) new Object[INIT_SIZE];
 		size = 0;
 	}
 	/**
