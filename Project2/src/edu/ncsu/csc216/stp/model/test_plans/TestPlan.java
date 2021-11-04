@@ -57,7 +57,7 @@ public class TestPlan extends AbstractTestPlan implements Comparable<TestPlan> {
 	/**
 	 * Compares the names of the Test Plans (case insensitive)
 	 * @param t the other Test Plan to compare to
-	 * @return documentation pending.
+	 * @return 0 if the names are identical, otherwise a non-zero integer.
 	 */
 	public int compareTo(TestPlan t) {
 		return getTestPlanName().toLowerCase().compareTo(t.getTestPlanName().toLowerCase());
