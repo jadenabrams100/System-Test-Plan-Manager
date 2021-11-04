@@ -84,7 +84,7 @@ public class TestPlanManager {
 		}
 		testPlans.add(new TestPlan(testPlanName));
 		for (int i = 0; i < testPlans.size(); i++) {
-			if(testPlans.get(i).getTestPlanName().equals(testPlanName)) {
+			if(testPlans.get(i).getTestPlanName().equalsIgnoreCase(testPlanName)) {
 				currentTestPlan = testPlans.get(i);
 				isChanged = true;
 				return;
