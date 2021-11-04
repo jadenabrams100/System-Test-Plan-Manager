@@ -44,6 +44,7 @@ class SwapListTest {
 		s.add("tenth");
 		s.add("eleventh");
 		s.add("null");
+		assertEquals("apple", s.get(0));
 	}
 
 	/**

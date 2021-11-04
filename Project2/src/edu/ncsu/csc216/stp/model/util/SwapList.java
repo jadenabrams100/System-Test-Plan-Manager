@@ -141,7 +141,7 @@ public class SwapList<E> implements ISwapList<E> {
 	private void checkCapacity(int i) {
 		if(i == list.length) {
 			E[] newList = (E[]) new Object[size * 2];
-			for(int idx = 0; i < size; idx++) {
+			for(int idx = 0; idx < size; idx++) {
 				newList[idx] = list[idx];
 			}
 			list = newList;
